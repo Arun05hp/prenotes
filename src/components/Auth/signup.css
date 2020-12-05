@@ -1,11 +1,9 @@
-.signin {
+.signup {
   padding: 25px;
   max-width: 400px;
   margin: 0 auto;
   text-align: center;
 }
-.signin Button {
+.signup Button {
   width: 100%;
 }
-/* .signin .ant-card {
-} */
