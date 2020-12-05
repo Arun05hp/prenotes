@@ -1,11 +1,12 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu, Grid } from "antd";
 import { Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
-
+const { useBreakpoint } = Grid;
 const MenuItems = () => {
+  const { md } = useBreakpoint();
   return (
-    <Menu mode="horizontal">
+    <Menu mode={md ? "horizontal" : "inline"}>
       <Menu.Item key="/">
         <Link to="/">Home</Link>
       </Menu.Item>

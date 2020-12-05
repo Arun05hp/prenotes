@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Drawer, Button } from "antd";
 import MenuItems from "./MenuItems";
-import DrawerMenuItems from "./DrawerMenuItems";
 import "./navbar.css";
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
@@ -36,7 +35,7 @@ const Navbar = () => {
           visible={visible}
           className="sidenav"
         >
-          <DrawerMenuItems />
+          <MenuItems />
         </Drawer>
       </div>
     </nav>

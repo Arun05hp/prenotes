@@ -1,17 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Navigation from "./Navigation/Navigation";
+
 import "./App.css";
+import Signin from "./components/Auth/Signin";
 
 const App = () => {
   return (
     <div className="app">
       <Router>
-        <Navbar />
-        <div className="app_container">
+        <Switch>
+          <Route path="/signin" exact component={Signin} />
           <Navigation />
-        </div>
+        </Switch>
       </Router>
     </div>
   );
