@@ -12,6 +12,7 @@ import {
   Steps,
   Select,
 } from "antd";
+import { UserOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./signup.css";
 const layout = {
@@ -28,10 +29,12 @@ const steps = [
   {
     title: "Basic Information",
     content: "First-content",
+    icon: <UserOutlined />,
   },
   {
     title: "Education",
     content: "Second-content",
+    icon: <FileTextOutlined />,
   },
 ];
 
@@ -71,7 +74,7 @@ const Signup = () => {
 
       <Steps current={current}>
         {steps.map((item) => (
-          <Step key={item.title} title={item.title} />
+          <Step key={item.title} title={item.title} icon={item.icon} />
         ))}
       </Steps>
       <Card>

@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="app_container">
-        <h3>Copyright © PreNotes.com. All rights reserved.</h3>
+        <h4>Copyright © PreNotes.com. All rights reserved.</h4>
       </div>
     </footer>
   );
