@@ -16,9 +16,7 @@ const Navbar = () => {
     <nav>
       <div className="app_container">
         <div className="navbar">
-          <div className="logo">
-            <a href="">logo</a>
-          </div>
+          <div className="logo">logo</div>
           <div className="navMenu">
             <div className="rightMenu">
               <MenuItems />

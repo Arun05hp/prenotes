@@ -6,6 +6,9 @@
 .signup h2 {
   text-align: center;
 }
+.signup .stepWrapper {
+  padding: 0 24px;
+}
 
 .signup .ant-card {
   margin-top: 10px;

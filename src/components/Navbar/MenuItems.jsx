@@ -38,6 +38,9 @@ const MenuItems = () => {
         <Menu.Item key="/tutor">
           <Link to="/tutor">Tutor</Link>
         </Menu.Item>
+        <Menu.Item key="/changepassword">
+          <Link to="/changepassword">Change Password</Link>
+        </Menu.Item>
         <Menu.Item key="/signout">
           <Link>Sign Out</Link>
         </Menu.Item>

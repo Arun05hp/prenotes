@@ -5,19 +5,22 @@ import Footer from "../components/Footer/Footer";
 import Home from "../components/Home";
 import Signup from "../components/Auth/signup";
 import Profile from "../components/Profile/Profile";
+import ChangePassword from "../components/Auth/ChangePassword";
 const Navigation = () => {
   return (
-    <>
+    <div className="main-container">
       <Navbar />
       <div className="app_container">
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/signup" exact component={Signup} />
           <Route path="/myprofile" exact component={Profile} />
+          <Route path="/changepassword" exact component={ChangePassword} />
+          <Route path="/myuploads" />
         </Switch>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

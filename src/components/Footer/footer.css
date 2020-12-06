@@ -1,6 +1,14 @@
 footer {
   border-top: solid 1px #e8e8e8;
-  box-shadow: 0 0 30px #f3f1f1;
+  box-shadow: 0 0 10px #f3f1f1;
   padding: 20px;
   text-align: center;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+footer h4 {
+  margin: 0;
 }

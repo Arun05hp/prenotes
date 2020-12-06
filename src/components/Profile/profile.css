@@ -1,0 +1,12 @@
+.profile .innerWrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+.profile .avatarWrapper {
+  text-align: center;
+}
+
+.profile .infoCard {
+  margin-top: 20px;
+}

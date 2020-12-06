@@ -19,9 +19,7 @@ const layout = {
   labelCol: { span: 24 },
   wrapperCol: { span: 24 },
 };
-const tailLayout = {
-  wrapperCol: { span: 24 },
-};
+
 const { RangePicker } = DatePicker;
 const { Step } = Steps;
 const { Option } = Select;
@@ -72,7 +70,7 @@ const Signup = () => {
     <div className="signup">
       <h2>Create account</h2>
 
-      <Steps current={current}>
+      <Steps current={current} className="stepWrapper">
         {steps.map((item) => (
           <Step key={item.title} title={item.title} icon={item.icon} />
         ))}
