@@ -1,9 +1,23 @@
 .signup {
   padding: 25px;
-  max-width: 400px;
+  max-width: 800px;
   margin: 0 auto;
+}
+.signup h2 {
   text-align: center;
 }
-.signup Button {
-  width: 100%;
+
+.signup .ant-card {
+  margin-top: 10px;
 }
+
+.signup .footer-link .ant-card-body {
+  padding: 10px;
+}
+.signup .footer-link .ant-card-body p {
+  margin: 0;
+  text-align: center;
+}
+/* .signup Button {
+  width: 100%;
+} */

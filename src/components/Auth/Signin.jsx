@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Form, Input, Button } from "antd";
+import { Button, Card, Form, Input } from "antd";
 import { Link } from "react-router-dom";
 import "./signin.css";
 
@@ -41,7 +41,7 @@ const Signin = () => {
 
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
-              Sign in
+              Next
             </Button>
           </Form.Item>
         </Form>
