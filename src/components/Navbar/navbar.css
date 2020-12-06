@@ -11,10 +11,15 @@ nav {
   border-bottom: 0;
 }
 
-.navbar .rightMenu ul .ant-menu-item {
+.navbar .rightMenu ul .ant-menu-item,
+.navbar .rightMenu ul .ant-menu-submenu {
   padding: 10px 0;
 }
 .navbar .rightMenu ul li a {
+  font-size: 16px;
+  font-weight: 500;
+}
+.navbar .rightMenu ul li span {
   font-size: 16px;
   font-weight: 500;
 }
@@ -56,6 +61,16 @@ nav {
 
 .navbar .hamburger > span {
   display: block;
+}
+
+.navbar .uname {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.navbar .uname,
+.sidenav .uname {
+  padding-left: 10px;
 }
 
 .sidenav .ant-drawer-body {
