@@ -1,0 +1,27 @@
+.myuploads {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+.myuploads .innerWrapper .ant-avatar {
+  width: 100%;
+  height: 100%;
+}
+.myuploads .itemWrapper .ant-card-body {
+  padding: 12px;
+}
+.myuploads .itemWrapper h3,
+.myuploads .itemWrapper p {
+  margin-bottom: 2px;
+}
+
+.myuploads .btnWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.myuploads .btnWrapper button {
+  margin-left: 15px;
+}

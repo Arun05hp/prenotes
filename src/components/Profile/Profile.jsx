@@ -227,7 +227,7 @@ const Profile = () => {
       </Modal>
       <Modal
         visible={visibleEdu}
-        title="Basic Information"
+        title="Education"
         // onOk={handleOk}
         onCancel={handleCancel}
         width={800}
