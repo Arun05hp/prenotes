@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
-import Home from "../components/Home";
+import Home from "../components/Home/Home";
 import Signup from "../components/Auth/signup";
 import Profile from "../components/Profile/Profile";
 import ChangePassword from "../components/Auth/ChangePassword";

@@ -1,5 +1,20 @@
 @import "~antd/dist/antd.css";
 
+:root {
+  --primary-color: rgba(91, 115, 191, 0.81);
+  --border-color: #5e76c2;
+  --black: rgba(0, 0, 0, 0.8);
+  --sec-black: rgba(51, 51, 51, 0.81);
+  --bg-color: #e5e5e5;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
 .app_container {
   max-width: 1200px;
   margin: 0 auto;
