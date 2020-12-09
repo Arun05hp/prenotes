@@ -3,10 +3,12 @@
 :root {
   --primary-color: rgba(91, 115, 191, 0.81);
   --border-color: #5e76c2;
-  --black: rgba(0, 0, 0, 0.8);
+  --black: rgba(0, 0, 0, 0.81);
   --sec-black: rgba(51, 51, 51, 0.81);
   --bg-color: #e5e5e5;
   --white: #ffffff;
+  --red: #de1515;
+  --yellow: #e2c00a;
 }
 
 body {
@@ -27,5 +29,5 @@ body {
   overflow: hidden;
   display: block;
   position: relative;
-  padding-bottom: 62px;
+  padding-bottom: 100px;
 }

@@ -1,12 +1,25 @@
 import React from "react";
-import { Avatar, Menu, Grid } from "antd";
+import { Avatar, Button, Menu, Grid } from "antd";
 import { Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
   const { md } = useBreakpoint();
 
-  return (
+  return true ? (
+    <Menu mode={md ? "horizontal" : "inline"}>
+      <Menu.Item key="/">
+        <Link to="/">Home</Link>
+      </Menu.Item>
+      <Menu.Item key="/signin">
+        <Link to="/signin">Sign in</Link>
+      </Menu.Item>
+
+      <Button className="signupBtn">
+        <Link to="/signup">Sign up </Link>
+      </Button>
+    </Menu>
+  ) : (
     <Menu mode={md ? "horizontal" : "inline"}>
       <Menu.Item key="/">
         <Link to="/">Home</Link>

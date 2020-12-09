@@ -1,14 +1,18 @@
 footer {
-  border-top: solid 1px #e8e8e8;
-  box-shadow: 0 0 10px #f3f1f1;
-  padding: 20px;
   text-align: center;
-  background-color: #fff;
   position: absolute;
   bottom: 0;
   width: 100%;
 }
 
+footer .footer {
+  background-image: url("../../assets/images/foot.svg");
+  background-repeat: no-repeat;
+  padding: 80px 0 20px 0;
+}
 footer h4 {
   margin: 0;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 600;
 }

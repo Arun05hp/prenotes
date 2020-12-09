@@ -19,19 +19,23 @@ nav {
 
 .navbar .rightMenu ul {
   border-bottom: 0;
+  display: flex;
+  align-items: center;
 }
 
 .navbar .rightMenu ul .ant-menu-item,
 .navbar .rightMenu ul .ant-menu-submenu {
   padding: 10px 0;
+  margin-left: 40px;
 }
 .navbar .rightMenu ul li a {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 .navbar .rightMenu ul li span {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .navbar .hamburger {
@@ -47,6 +51,24 @@ nav {
   height: 2px;
   background: #1890ff;
   position: relative;
+}
+.navbar .signupBtn {
+  padding: 0;
+  margin-left: 40px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  color: var(--white);
+}
+.navbar .signupBtn:hover {
+  background-color: var(--border-color);
+
+  color: var(--white);
+}
+.navbar .signupBtn a {
+  padding: 10px 33px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .navbar .hamburger .barsBtn:after,
@@ -74,8 +96,8 @@ nav {
 }
 
 .navbar .uname {
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .navbar .uname,
