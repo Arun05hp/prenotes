@@ -6,7 +6,7 @@ const Footer = () => {
     <footer>
       <div className="app_container">
         <div className="footer">
-          <h4>Copyright © PreNotes.com All Rights Reserved.</h4>
+          <h4>Copyright © 2020 Prenotes. All rights reserved.</h4>
         </div>
       </div>
     </footer>

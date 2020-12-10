@@ -1,5 +1,7 @@
 import React from "react";
-import { Row, Card, Col, Input } from "antd";
+import { Button, Row, Card, Col, Input, Form } from "antd";
+
+import Slider from "./UserSlider";
 import TableImg from "../../assets/images/boytable.svg";
 import {
   BookOutlined,
@@ -16,7 +18,7 @@ const Home = () => {
   const onSearch = (value) => console.log(value);
   return (
     <div className="home_wrapper">
-      <div className="search_container">
+      <section className="search_container">
         <Row gutter={16}>
           <Col md={12} xs={24}>
             <div className="search_wrapper">
@@ -47,8 +49,8 @@ const Home = () => {
             </div>
           </Col>
         </Row>
-      </div>
-      <div className="prenotes_wrapper">
+      </section>
+      <section className="prenotes_wrapper">
         <div className="title_wrapper">
           <span className="title">Why use Prenotes?</span>
           <div className="hr" />
@@ -105,11 +107,72 @@ const Home = () => {
             </Col>
           </Row>
         </div>
-      </div>
+      </section>
+      <section className="user_wrapper">
+        <div className="title_wrapper">
+          <span className="title">What our Users say</span>
+          <div className="hr" />
+          <div className="slider_wrapper">
+            <Slider />
+          </div>
+        </div>
+      </section>
+      <section className="feed_wrapper">
+        <div className="title_wrapper">
+          <span className="title">Give your Feedback</span>
+          <div className="hr" />
+        </div>
+        <Card>
+          <Form layout="vertical">
+            <Row gutter={[32, 16]}>
+              <Col md={12} xs={24}>
+                <Form.Item
+                  label="Name"
+                  name="name"
+                  rules={[
+                    { required: true, message: "Please Input your Name!" },
+                  ]}
+                >
+                  <Input size="large" />
+                </Form.Item>
+                <Form.Item
+                  label="Email"
+                  name="email"
+                  rules={[
+                    { required: true, message: "Email Required!" },
+                    { type: "email", message: "Email is not valid Email" },
+                  ]}
+                >
+                  <Input size="large" />
+                </Form.Item>
+                <Form.Item label="Contact No." name="cno">
+                  <Input size="large" />
+                </Form.Item>
+              </Col>
+              <Col md={12} xs={24}>
+                <div className="textarea_wrapper">
+                  <Form.Item
+                    label="Your Message"
+                    name="msg"
+                    rules={[
+                      { required: true, message: "Please Input your Message!" },
+                    ]}
+                  >
+                    <Input.TextArea size="large" />
+                  </Form.Item>
+                </div>
+              </Col>
+            </Row>
+            <div className="feedBtn">
+              <Button htmlType="submit">Send Message</Button>
+            </div>
+          </Form>
+        </Card>
+      </section>
       <section className="made_wrapper">
         <div className="title_wrapper">
           <h2>
-            Made with <HeartOutlined /> and a lots of <CoffeeOutlined />
+            Made with <HeartOutlined /> and lots of <CoffeeOutlined />
           </h2>
         </div>
       </section>
