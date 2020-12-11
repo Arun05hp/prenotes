@@ -131,6 +131,10 @@ nav {
   border-bottom-color: transparent;
 } */
 
+.sign_modal .ant-modal-content {
+  border-radius: 10px;
+}
+
 @media (max-width: 767px) {
   .navbar .hamburger {
     display: inline-block;

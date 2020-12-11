@@ -1,11 +1,29 @@
 .signin {
   padding: 25px;
-  max-width: 400px;
-  margin: 0 auto;
-  text-align: center;
+  /* max-width: 400px;
+  margin: 0 auto; */
+  /* text-align: center; */
 }
+.signin h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--sec-black);
+  margin-bottom: 5px;
+}
+
+.signin p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sec-black);
+  margin-bottom: 20px;
+}
+
 .signin Button {
+  margin-top: 10px;
   width: 100%;
+  padding: 14px 0;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 600;
 }
-/* .signin .ant-card {
-} */

@@ -34,3 +34,14 @@ img {
   position: relative;
   padding-bottom: 100px;
 }
+
+.ant-form .ant-form-item-label > label {
+  color: var(--sec-black);
+  font-weight: 500;
+}
+
+.ant-form .ant-form-item-label > label::before {
+  position: absolute;
+  right: -15px;
+  top: -2px;
+}

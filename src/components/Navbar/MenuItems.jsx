@@ -1,20 +1,44 @@
-import React from "react";
-import { Avatar, Button, Menu, Grid } from "antd";
+import React, { useState } from "react";
+import { Avatar, Button, Menu, Modal, Grid } from "antd";
 import { Link } from "react-router-dom";
+import SignIn from "../Auth/Signin";
 const SubMenu = Menu.SubMenu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
   const { md } = useBreakpoint();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
 
   return true ? (
     <Menu mode={md ? "horizontal" : "inline"}>
       <Menu.Item key="/">
         <Link to="/">Home</Link>
       </Menu.Item>
-      <Menu.Item key="/signin">
-        <Link to="/signin">Sign in</Link>
+      <Menu.Item key="/signin" onClick={showModal}>
+        <Link>Sign in</Link>
       </Menu.Item>
-
+      <Modal
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+        width={400}
+        className="sign_modal"
+      >
+        <SignIn />
+      </Modal>
       <Button className="signupBtn">
         <Link to="/signup">Sign up </Link>
       </Button>
