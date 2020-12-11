@@ -345,8 +345,8 @@ const Signup = () => {
                       </Col>
                       <Col md={12} xs={24}>
                         <Form.Item
-                          name="hostaler"
-                          label="Hostaler"
+                          name="hosteler"
+                          label="Hosteler"
                           rules={[
                             { required: true, message: "Please pick an item!" },
                           ]}
