@@ -1,11 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
 import Navigation from "./Navigation/Navigation";
-
-import "./App.css";
-
 import Signup from "./components/Auth/Signup";
+import "./App.css";
 
 const App = () => {
   return (
