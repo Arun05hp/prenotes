@@ -5,7 +5,6 @@ import MenuItems from "./MenuItems";
 import "./navbar.css";
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-
   const showDrawer = () => {
     setVisible(true);
   };
@@ -13,6 +12,7 @@ const Navbar = () => {
   const onClose = () => {
     setVisible(false);
   };
+
   return (
     <nav>
       <div className="app_container">

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Button,
-  Card,
   Col,
   DatePicker,
   Form,
@@ -14,6 +13,7 @@ import {
 } from "antd";
 import { UserOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import SVG from "../../assets/images/signuplogo.svg";
 import "./signup.css";
 const layout = {
   labelCol: { span: 24 },
@@ -25,12 +25,12 @@ const { Step } = Steps;
 const { Option } = Select;
 const steps = [
   {
-    title: "Basic Information",
+    title: " ",
     content: "First-content",
     icon: <UserOutlined />,
   },
   {
-    title: "Education",
+    title: " ",
     content: "Second-content",
     icon: <FileTextOutlined />,
   },
@@ -68,279 +68,325 @@ const Signup = () => {
 
   return (
     <div className="signup">
-      <h2>Create account</h2>
+      <Row>
+        <Col md={8} xs={0}>
+          <div className="create_svg_wrapper">
+            <div className="text_wrapper">
+              <div className="info">
+                <Link to="/">
+                  <h2>Prenotes</h2>
+                </Link>
+                <p>Search or upload notes from</p>
+                <p>device instantly.</p>
+              </div>
 
-      <Steps current={current} className="stepWrapper">
-        {steps.map((item) => (
-          <Step key={item.title} title={item.title} icon={item.icon} />
-        ))}
-      </Steps>
-      <Card>
-        <Form
-          {...layout}
-          layout="vertical"
-          initialValues={{ remember: true }}
-          name="basic"
-          onFinish={onFinish}
-        >
-          {current === 0 && (
-            <>
-              <Row gutter={16}>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="First Name"
-                    name="firstName"
-                    rules={[
-                      { required: true, message: "Please input your name!" },
-                    ]}
-                  >
-                    <Input autoComplete="off" />
-                  </Form.Item>
-                </Col>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Last Name"
-                    name="lastName"
-                    rules={[
-                      { required: true, message: "Please input your name!" },
-                    ]}
-                  >
-                    <Input autoComplete="off" />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Mobile Number"
-                    name="mobno"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your mobile number!",
-                      },
-                      {
-                        minLength: 10,
-                        maxLength: 10,
-                        pattern: "^[0-9]{10}$",
-                        message: "Must be 10 digits",
-                      },
-                    ]}
-                  >
-                    <Input type="tel" />
-                  </Form.Item>
-                </Col>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="DOB"
-                    name="dob"
-                    rules={[{ required: true, message: "Required!" }]}
-                  >
-                    <DatePicker
-                      allowClear={false}
-                      style={{ width: "100%" }}
-                      format={dateFormat}
+              <div className="svg_wrapper">
+                <img src={SVG} alt="Icon" />
+              </div>
+            </div>
+          </div>
+        </Col>
+        <Col md={16} xs={24}>
+          <div className="signup_wrapper">
+            <div className="text_wrapper">
+              <h2>Create account</h2>
+              <p>
+                Already have an Account?{" "}
+                <Link to="/?signin=true">Sign In </Link>
+              </p>
+              <div className="steps_wrapper">
+                <Steps current={current} className="stepWrapper">
+                  {steps.map((item) => (
+                    <Step
+                      key={item.title}
+                      title={item.title}
+                      icon={item.icon}
                     />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Email"
-                    name="email"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your username!",
-                      },
-                      { type: "email", message: "Please input valid email!" },
-                    ]}
-                  >
-                    <Input autoComplete="off" />
-                  </Form.Item>
-                </Col>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Password"
-                    name="password"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input your password!",
-                      },
-                    ]}
-                  >
-                    <Input.Password />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <div className="btnWrapper">
-                <Button type="primary" htmlType="submit">
-                  Next
-                </Button>
+                  ))}
+                </Steps>
               </div>
-            </>
-          )}
 
-          {current === 1 && (
-            <>
-              <Row gutter={16}>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Institution"
-                    name="institution"
-                    rules={[{ required: true, message: "Required!" }]}
-                  >
-                    <Select
-                      showSearch
-                      placeholder="Select College"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.children
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      }
-                      filterSort={(optionA, optionB) =>
-                        optionA.children
-                          .toLowerCase()
-                          .localeCompare(optionB.children.toLowerCase())
-                      }
-                    >
-                      <Option value={1}>
-                        Sant Longowal Institute of Engineering and Technology
-                      </Option>
-                      <Option value={2}>Panjab University</Option>
-                      {/* <Option value={3}>Communicated</Option>
+              <Form
+                {...layout}
+                layout="vertical"
+                initialValues={{ remember: true }}
+                name="basic"
+                onFinish={onFinish}
+              >
+                {current === 0 && (
+                  <>
+                    <Row gutter={16}>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          label="Name"
+                          name="Name"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your name!",
+                            },
+                          ]}
+                        >
+                          <Input autoComplete="off" size="large" />
+                        </Form.Item>
+                      </Col>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          label="DOB"
+                          name="dob"
+                          rules={[{ required: true, message: "Required!" }]}
+                        >
+                          <DatePicker
+                            allowClear={false}
+                            style={{ width: "100%" }}
+                            format={dateFormat}
+                            size="large"
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={16}>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          label="Mobile Number"
+                          name="mobno"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your mobile number!",
+                            },
+                            {
+                              minLength: 10,
+                              maxLength: 10,
+                              pattern: "^[0-9]{10}$",
+                              message: "Must be 10 digits",
+                            },
+                          ]}
+                        >
+                          <Input type="tel" size="large" />
+                        </Form.Item>
+                      </Col>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          name="gender"
+                          label="Gender"
+                          rules={[{ required: true, message: "Required!" }]}
+                        >
+                          <Radio.Group
+                            optionType="button"
+                            buttonStyle="solid"
+                            size="large"
+                          >
+                            <Radio.Button value="Male">Male</Radio.Button>
+                            <Radio.Button value="Female">Female</Radio.Button>
+                          </Radio.Group>
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={16}>
+                      <Col md={24} xs={24}>
+                        <Form.Item
+                          label="Email"
+                          name="email"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your username!",
+                            },
+                            {
+                              type: "email",
+                              message: "Please input valid email!",
+                            },
+                          ]}
+                        >
+                          <Input autoComplete="off" size="large" />
+                        </Form.Item>
+                      </Col>
+                      <Col md={24} xs={24}>
+                        <Form.Item
+                          label="Password"
+                          name="password"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Please input your password!",
+                            },
+                          ]}
+                        >
+                          <Input.Password size="large" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <div className="btnWrapper">
+                      <Row gutter={16}>
+                        <Col md={12} xs={12}>
+                          <Button type="primary" htmlType="submit">
+                            Next
+                          </Button>
+                        </Col>
+                      </Row>
+                    </div>
+                  </>
+                )}
+
+                {current === 1 && (
+                  <>
+                    <Row gutter={16}>
+                      <Col md={24} xs={24}>
+                        <Form.Item
+                          label="Institution"
+                          name="institution"
+                          rules={[{ required: true, message: "Required!" }]}
+                        >
+                          <Select
+                            showSearch
+                            size="large"
+                            placeholder="Select College"
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                              option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                            }
+                            filterSort={(optionA, optionB) =>
+                              optionA.children
+                                .toLowerCase()
+                                .localeCompare(optionB.children.toLowerCase())
+                            }
+                          >
+                            <Option value={1}>
+                              Sant Longowal Institute of Engineering and
+                              Technology
+                            </Option>
+                            <Option value={2}>Panjab University</Option>
+                            {/* <Option value={3}>Communicated</Option>
                       <Option value={4}>Identified</Option> */}
-                    </Select>
-                  </Form.Item>
-                </Col>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Branch"
-                    name="branch"
-                    rules={[{ required: true, message: "Required!" }]}
-                  >
-                    <Select
-                      showSearch
-                      placeholder="Select Branch"
-                      optionFilterProp="children"
-                      filterOption={(input, option) =>
-                        option.children
-                          .toLowerCase()
-                          .indexOf(input.toLowerCase()) >= 0
-                      }
-                      filterSort={(optionA, optionB) =>
-                        optionA.children
-                          .toLowerCase()
-                          .localeCompare(optionB.children.toLowerCase())
-                      }
-                    >
-                      <Option value="1">Mechanical Engineering</Option>
-                      <Option value="2">Computer Science Engineering</Option>
-                      <Option value="3">Electrical Engineering</Option>
-                      <Option value="4">Civil Engineering</Option>
-                      <Option value="5">Instrumentation Engineering</Option>
-                      <Option value="6">Chemical Engineering</Option>
-                    </Select>
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Semester"
-                    name="sem"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Required!",
-                      },
-                      {
-                        minLength: 1,
-                        maxLength: 1,
-                        pattern: "^[0-8]{1}$",
-                        message: "Number Only 1-8",
-                      },
-                    ]}
-                  >
-                    <Input type="tel" placeholder="1" />
-                  </Form.Item>
-                </Col>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label={"Start & End Year "}
-                    name="duration"
-                    rules={[{ required: true, message: "Required!" }]}
-                  >
-                    <RangePicker style={{ width: "100%" }} picker="year" />
-                  </Form.Item>
-                </Col>
-              </Row>
-              <Row gutter={16}>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    label="Roll No / Reg No"
-                    name="regNo"
-                    rules={[{ required: true, message: "Required!" }]}
-                  >
-                    <Input autoComplete="off" />
-                  </Form.Item>
-                </Col>
-                <Col md={12} xs={24}>
-                  <Form.Item
-                    name="hostaler"
-                    label="Hostaler"
-                    rules={[
-                      { required: true, message: "Please pick an item!" },
-                    ]}
-                  >
-                    <Radio.Group>
-                      <Radio.Button value={1}>Yes</Radio.Button>
-                      <Radio.Button value={0}>No</Radio.Button>
-                    </Radio.Group>
-                  </Form.Item>
-                </Col>
-              </Row>
-              <div className="btnWrapper">
-                <Button style={{ marginRight: "8px" }} onClick={() => prev()}>
-                  Previous
-                </Button>
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col md={24} xs={24}>
+                        <Form.Item
+                          label="Branch"
+                          name="branch"
+                          rules={[{ required: true, message: "Required!" }]}
+                        >
+                          <Select
+                            showSearch
+                            size="large"
+                            placeholder="Select Branch"
+                            optionFilterProp="children"
+                            filterOption={(input, option) =>
+                              option.children
+                                .toLowerCase()
+                                .indexOf(input.toLowerCase()) >= 0
+                            }
+                            filterSort={(optionA, optionB) =>
+                              optionA.children
+                                .toLowerCase()
+                                .localeCompare(optionB.children.toLowerCase())
+                            }
+                          >
+                            <Option value="1">Mechanical Engineering</Option>
+                            <Option value="2">
+                              Computer Science Engineering
+                            </Option>
+                            <Option value="3">Electrical Engineering</Option>
+                            <Option value="4">Civil Engineering</Option>
+                            <Option value="5">
+                              Instrumentation Engineering
+                            </Option>
+                            <Option value="6">Chemical Engineering</Option>
+                          </Select>
+                        </Form.Item>
+                      </Col>
 
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </div>
-            </>
-          )}
-        </Form>
-      </Card>
-      {/* <div className="steps-action">
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-            Previous
-          </Button>
-        )}
-      </div> */}
-      <Card className="footer-link">
-        <p>
-          Already have an account? <Link to="/signin">Sign In </Link>
-        </p>
-      </Card>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          label="Semester"
+                          name="sem"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Required!",
+                            },
+                            {
+                              minLength: 1,
+                              maxLength: 1,
+                              pattern: "^[0-8]{1}$",
+                              message: "Number Only 1-8",
+                            },
+                          ]}
+                        >
+                          <Input type="tel" placeholder="1" size="large" />
+                        </Form.Item>
+                      </Col>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          label={"Batch"}
+                          name="duration"
+                          rules={[{ required: true, message: "Required!" }]}
+                        >
+                          <RangePicker
+                            style={{ width: "100%" }}
+                            picker="year"
+                            size="large"
+                          />
+                        </Form.Item>
+                      </Col>
+
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          label="Registration No."
+                          name="regNo"
+                          rules={[{ required: true, message: "Required!" }]}
+                        >
+                          <Input autoComplete="off" size="large" />
+                        </Form.Item>
+                      </Col>
+                      <Col md={12} xs={24}>
+                        <Form.Item
+                          name="hostaler"
+                          label="Hostaler"
+                          rules={[
+                            { required: true, message: "Please pick an item!" },
+                          ]}
+                        >
+                          <Radio.Group
+                            optionType="button"
+                            buttonStyle="solid"
+                            size="large"
+                          >
+                            <Radio.Button value={1}>Yes</Radio.Button>
+                            <Radio.Button value={0}>No</Radio.Button>
+                          </Radio.Group>
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <div className="btnWrapper">
+                      <Row gutter={16}>
+                        <Col md={12} xs={12}>
+                          <Button
+                            style={{ marginRight: "8px" }}
+                            onClick={() => prev()}
+                          >
+                            Previous
+                          </Button>
+                        </Col>
+
+                        <Col md={12} xs={12}>
+                          <Button type="primary" htmlType="submit">
+                            Submit
+                          </Button>
+                        </Col>
+                      </Row>
+                    </div>
+                  </>
+                )}
+              </Form>
+            </div>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 };

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar, Button, Menu, Modal, Grid } from "antd";
 import { Link } from "react-router-dom";
+import queryString from "query-string";
 import SignIn from "../Auth/Signin";
 const SubMenu = Menu.SubMenu;
 const { useBreakpoint } = Grid;
@@ -20,6 +21,14 @@ const MenuItems = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+
+  useEffect(() => {
+    const params = queryString.parse(window.location.search);
+
+    if (params.signin && params.signin == "true") {
+      showModal();
+    }
+  }, []);
 
   return true ? (
     <Menu mode={md ? "horizontal" : "inline"}>

@@ -1,11 +1,77 @@
 .signup {
+  height: 100vh;
+}
+
+.signup > .ant-row {
+  height: 100%;
+}
+.signup .create_svg_wrapper {
   padding: 25px;
-  max-width: 800px;
+  background-color: var(--border-color);
+  height: 100%;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup .create_svg_wrapper .text_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 600px;
+  height: 100%;
+}
+
+.signup .create_svg_wrapper h2 {
+  font-size: 24px;
+  background-color: var(--border-color);
+  color: var(--white);
+}
+
+.signup .create_svg_wrapper p {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  line-height: 30px;
+  color: var(--white);
+}
+
+.signup .signup_wrapper {
+  max-width: 500px;
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
 }
-.signup h2 {
-  text-align: center;
+
+.signup .signup_wrapper .text_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-height: 600px;
 }
+
+.signup .signup_wrapper h2 {
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--sec-black);
+  margin-bottom: 5px;
+  line-height: 41px;
+}
+
+.signup .signup_wrapper p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--sec-black);
+  margin-bottom: 5px;
+}
+
+.signup .steps_wrapper {
+  padding: 15px 0 20px 0;
+}
+
 .signup .stepWrapper {
   padding: 0 24px;
 }
@@ -14,14 +80,26 @@
   margin-top: 10px;
 }
 
-.signup .footer-link .ant-card-body {
-  padding: 10px;
-}
-.signup .footer-link .ant-card-body p {
-  margin: 0;
-  text-align: center;
+.signup Button {
+  width: 100%;
 }
 
-/* .signup Button {
+.signup .ant-btn {
+  margin-top: 10px;
   width: 100%;
-} */
+  padding: 10px 0;
+  height: auto;
+  background-color: var(--white);
+  color: var(--sec-black);
+  font-weight: 600;
+}
+
+.signup .ant-btn-primary {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px 0;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 600;
+}
