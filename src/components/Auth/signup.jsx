@@ -13,6 +13,7 @@ import {
 } from "antd";
 import { UserOutlined, FileTextOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import http from "../../services/httpService";
 import SVG from "../../assets/images/signuplogo.svg";
 import "./signup.css";
 const layout = {
@@ -38,14 +39,15 @@ const steps = [
 
 const dateFormat = "DD/MM/YYYY";
 const initialInfo = {
-  firstName: "",
-  lastName: "",
-  mobno: null,
+  name: "",
+  gender: "",
+  mno: null,
   dob: null,
   email: "",
   password: "",
 };
 const Signup = () => {
+  const [form] = Form.useForm();
   const [current, setCurrent] = useState(0);
   const [userInfo, setUserInfo] = useState(initialInfo);
   const next = () => {
@@ -62,8 +64,26 @@ const Signup = () => {
       next();
       return;
     }
-    console.log("Success:", { ...userInfo, values });
-    message.success("Registered", 3);
+    let data = {
+      ...userInfo,
+      ...values,
+      batchStart: values.batch[0],
+      batchEnd: values.batch[1],
+    };
+    delete data.batch;
+    http
+      .post("/user/signup", data)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        message.success("Registered Successfully", 3);
+        form.resetFields();
+      })
+      .catch((err) => {
+        if (err.response.status === 400)
+          message.error(err.response.data.message, 3);
+      });
   };
 
   return (
@@ -107,6 +127,7 @@ const Signup = () => {
               </div>
 
               <Form
+                form={form}
                 {...layout}
                 layout="vertical"
                 initialValues={{ remember: true }}
@@ -119,7 +140,7 @@ const Signup = () => {
                       <Col md={12} xs={24}>
                         <Form.Item
                           label="Name"
-                          name="Name"
+                          name="name"
                           rules={[
                             {
                               required: true,
@@ -149,7 +170,7 @@ const Signup = () => {
                       <Col md={12} xs={24}>
                         <Form.Item
                           label="Mobile Number"
-                          name="mobno"
+                          name="mno"
                           rules={[
                             {
                               required: true,
@@ -168,8 +189,8 @@ const Signup = () => {
                       </Col>
                       <Col md={12} xs={24}>
                         <Form.Item
-                          name="gender"
                           label="Gender"
+                          name="gender"
                           rules={[{ required: true, message: "Required!" }]}
                         >
                           <Radio.Group
@@ -235,7 +256,7 @@ const Signup = () => {
                       <Col md={24} xs={24}>
                         <Form.Item
                           label="Institution"
-                          name="institution"
+                          name="institute"
                           rules={[{ required: true, message: "Required!" }]}
                         >
                           <Select
@@ -323,7 +344,7 @@ const Signup = () => {
                       <Col md={12} xs={24}>
                         <Form.Item
                           label={"Batch"}
-                          name="duration"
+                          name="batch"
                           rules={[{ required: true, message: "Required!" }]}
                         >
                           <RangePicker
@@ -337,7 +358,7 @@ const Signup = () => {
                       <Col md={12} xs={24}>
                         <Form.Item
                           label="Registration No."
-                          name="regNo"
+                          name="regno"
                           rules={[{ required: true, message: "Required!" }]}
                         >
                           <Input autoComplete="off" size="large" />

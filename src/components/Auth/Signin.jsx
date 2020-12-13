@@ -1,19 +1,30 @@
 import React from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { Link } from "react-router-dom";
+import http from "../../services/httpService";
 import "./signin.css";
 
 const layout = {
   labelCol: { span: 24 },
   wrapperCol: { span: 24 },
 };
-const tailLayout = {
-  wrapperCol: { span: 24 },
-};
 
 const Signin = () => {
+  const [form] = Form.useForm();
   const onFinish = (values) => {
-    console.log("Success:", values);
+    http
+      .post("/user/signin", values)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        message.success("Sing In Successfully", 3);
+        form.resetFields();
+      })
+      .catch((err) => {
+        if (err.response.status === 400)
+          message.error(err.response.data.message, 3);
+      });
   };
   return (
     <div className="signin">
