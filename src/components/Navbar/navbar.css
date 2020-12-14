@@ -16,6 +16,11 @@ nav {
 .navbar .logo a {
   color: var(--primary-color);
 }
+.navbar .nav_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 .navbar .rightMenu ul {
   border-bottom: 0;
@@ -28,7 +33,7 @@ nav {
   padding: 10px 0;
   margin-left: 40px;
 }
-.navbar .rightMenu ul li a {
+.navbar .rightMenu ul li {
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;

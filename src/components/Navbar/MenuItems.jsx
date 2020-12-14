@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Avatar, Button, Menu, Modal, Grid } from "antd";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { Context as AuthContext } from "../../context/AuthContext";
 import queryString from "query-string";
 import SignIn from "../Auth/Signin";
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
   const { md } = useBreakpoint();
 
+  const { state, logout } = useContext(AuthContext);
+  const { loginFlag } = state;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -22,22 +25,28 @@ const MenuItems = () => {
     setIsModalVisible(false);
   };
 
+  const handleClick = ({ key }) => {
+    console.log(key);
+  };
+
   useEffect(() => {
     const params = queryString.parse(window.location.search);
 
-    if (params.signin && params.signin == "true") {
+    if (params.signin && params.signin === "true") {
       showModal();
     }
   }, []);
 
-  return true ? (
-    <Menu mode={md ? "horizontal" : "inline"}>
-      <Menu.Item key="/">
-        <Link to="/">Home</Link>
-      </Menu.Item>
-      <Menu.Item key="/signin" onClick={showModal}>
-        <Link>Sign in</Link>
-      </Menu.Item>
+  return loginFlag === false ? (
+    <div className="nav_wrapper">
+      <Menu mode={md ? "horizontal" : "inline"} onClick={handleClick}>
+        <Menu.Item key="/?signin=true" onClick={() => showModal()}>
+          Sign in
+        </Menu.Item>
+      </Menu>
+      <Button className="signupBtn">
+        <NavLink to="/signup">Sign up </NavLink>
+      </Button>
       <Modal
         visible={isModalVisible}
         onOk={handleOk}
@@ -46,24 +55,11 @@ const MenuItems = () => {
         width={400}
         className="sign_modal"
       >
-        <SignIn />
+        <SignIn handleCancel={handleCancel} />
       </Modal>
-      <Button className="signupBtn">
-        <Link to="/signup">Sign up </Link>
-      </Button>
-    </Menu>
+    </div>
   ) : (
     <Menu mode={md ? "horizontal" : "inline"}>
-      <Menu.Item key="/">
-        <Link to="/">Home</Link>
-      </Menu.Item>
-      <Menu.Item key="/signin">
-        <Link to="/signin">Sign in</Link>
-      </Menu.Item>
-      <Menu.Item key="/signup">
-        <Link to="/signup">Sign up</Link>
-      </Menu.Item>
-
       <SubMenu
         key="sub1"
         title={
@@ -76,24 +72,12 @@ const MenuItems = () => {
         }
       >
         <Menu.Item key="/profile">
-          <Link to="/myprofile">My Profile</Link>
+          <NavLink to="/myprofile">My Profile</NavLink>
         </Menu.Item>
-        <Menu.Item key="/myuploads">
-          <Link to="/myuploads">My Uploads</Link>
-        </Menu.Item>
-        <Menu.Item key="/tutor">
-          <Link to="/tutor">Tutor</Link>
-        </Menu.Item>
-        <Menu.Item key="/changepassword">
-          <Link to="/changepassword">Change Password</Link>
-        </Menu.Item>
-        <Menu.Item key="/signout">
-          <Link>Sign Out</Link>
+        <Menu.Item key="/signout" onClick={() => logout()}>
+          <NavLink to=""> Sign Out</NavLink>
         </Menu.Item>
       </SubMenu>
-      <Menu.Item key="/aboutus">
-        <Link to="/aboutus">About Us</Link>
-      </Menu.Item>
     </Menu>
   );
 };

@@ -4,8 +4,6 @@ import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer/Footer";
 import Home from "../components/Home/Home";
 import Profile from "../components/Profile/Profile";
-import ChangePassword from "../components/Auth/ChangePassword";
-import MyUpload from "../components/MyUpload/MyUpload";
 
 const Navigation = () => {
   return (
@@ -15,8 +13,9 @@ const Navigation = () => {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/myprofile" exact component={Profile} />
-          <Route path="/changepassword" exact component={ChangePassword} />
-          <Route path="/myuploads" exact component={MyUpload} />
+          <Route path="/myprofile/personalInfo" exact component={Profile} />
+          <Route path="/myprofile/myuploads" exact component={Profile} />
+          <Route path="/myprofile/changepassword" exact component={Profile} />
         </Switch>
       </div>
       <Footer />

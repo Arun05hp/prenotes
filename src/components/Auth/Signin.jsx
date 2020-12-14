@@ -1,5 +1,6 @@
-import React from "react";
-import { Button, Form, Input, message } from "antd";
+import React, { useContext } from "react";
+import { Button, Form, Input, notification } from "antd";
+import { Context as AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import http from "../../services/httpService";
 import "./signin.css";
@@ -9,7 +10,9 @@ const layout = {
   wrapperCol: { span: 24 },
 };
 
-const Signin = () => {
+const Signin = ({ handleCancel }) => {
+  const { login } = useContext(AuthContext);
+
   const [form] = Form.useForm();
   const onFinish = (values) => {
     http
@@ -18,12 +21,21 @@ const Signin = () => {
         return res.data;
       })
       .then((res) => {
-        message.success("Sing In Successfully", 3);
+        handleCancel();
         form.resetFields();
+        console.log(res.token);
+        notification.success({
+          message: "Login Successful",
+          placement: "topRight",
+        });
+        login(true, res.token);
       })
       .catch((err) => {
         if (err.response.status === 400)
-          message.error(err.response.data.message, 3);
+          notification.error({
+            message: err.response.data.message,
+            placement: "topRight",
+          });
       });
   };
   return (
@@ -32,7 +44,13 @@ const Signin = () => {
       <p>
         Don't have an Account? <Link to="/signup">Create Now </Link>
       </p>
-      <Form {...layout} layout="vertical" name="basic" onFinish={onFinish}>
+      <Form
+        form={form}
+        {...layout}
+        layout="vertical"
+        name="basic"
+        onFinish={onFinish}
+      >
         <Form.Item
           label="Email"
           name="email"

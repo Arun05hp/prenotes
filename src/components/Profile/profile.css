@@ -1,3 +1,42 @@
+.profile {
+  padding: 24px 0;
+}
+
+.profile .ant-layout-sider,
+.profile .ant-layout {
+  background-color: var(--white);
+}
+
+.profile .ant-layout-sider-children .ant-menu {
+  padding: 8px 0;
+  border-radius: 10px;
+  background-color: var(--border-color);
+}
+
+.profile .ant-layout-sider-children .ant-menu h3 {
+  padding: 24px 16px 16px 16px;
+  margin: 0;
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.profile .ant-layout-sider-children .ant-menu li {
+  margin: 0;
+}
+.profile .ant-layout-sider-children .ant-menu-item a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+}
+.profile .ant-layout-sider-children .ant-menu-item .anticon {
+  color: var(--white);
+}
+
+.profile .ant-layout-sider-children .ant-menu .ant-menu-item-selected {
+  background-color: #93a4d5;
+}
+
 .profile .innerWrapper {
   max-width: 600px;
   margin: 0 auto;
