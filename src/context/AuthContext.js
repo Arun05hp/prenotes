@@ -1,31 +1,64 @@
 import createDataContext from "./createDataContext";
-
+import SecureStorage from "../helper/SecureStorage";
+import http from "../services/httpService";
 const authReducer = (state, action) => {
   switch (action.type) {
     case "login":
       return { ...state, loginFlag: action.payload };
     case "logout":
       return { ...state, loginFlag: false };
+    case "setUser":
+      console.log("action.payload", action.payload);
+      return { ...state, userData: action.payload };
     default:
       return state;
   }
 };
 
 const tryLocalSignin = (dispatch) => async () => {
-  const token = await localStorage.getItem("token");
-  if (token) {
-    dispatch({
-      type: "login",
-      payload: true,
-    });
+  try {
+    const flag = JSON.parse(SecureStorage.getItem("loginFlag"));
+    const data = JSON.parse(SecureStorage.getItem("userData"));
+    console.log(flag, data);
+    if (flag && data.token) {
+      dispatch({
+        type: "login",
+        payload: true,
+      });
+      return data.id;
+    }
+    return false;
+  } catch (error) {
+    console.log("err", error);
   }
 };
 
-const login = (dispatch) => (flag, token) => {
-  console.log("req", flag, token);
+const login = (dispatch) => (flag, user) => {
+  console.log("req", flag, user);
   try {
-    localStorage.setItem("token", token);
+    SecureStorage.setItem("userData", JSON.stringify(user));
+    SecureStorage.setItem("loginFlag", JSON.stringify(flag));
     dispatch({ type: "login", payload: flag });
+  } catch (error) {
+    console.log("err", error);
+  }
+};
+
+const getUserDetails = (dispatch) => (userId) => {
+  console.log("userId", userId);
+  try {
+    http
+      .get("/user/userDetails/" + userId)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: "setUser", payload: res.userDetails });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   } catch (error) {
     console.log("err", error);
   }
@@ -34,7 +67,7 @@ const login = (dispatch) => (flag, token) => {
 const logout = (dispatch) => () => {
   console.log("logout");
   try {
-    localStorage.removeItem("token");
+    localStorage.clear();
     dispatch({ type: "logout" });
   } catch (error) {
     console.log("err", error);
@@ -43,6 +76,6 @@ const logout = (dispatch) => () => {
 
 export const { Provider, Context } = createDataContext(
   authReducer,
-  { tryLocalSignin, login, logout },
-  { loginFlag: false }
+  { tryLocalSignin, login, logout, getUserDetails },
+  { loginFlag: false, userData: {} }
 );

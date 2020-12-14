@@ -307,16 +307,16 @@ const Signup = () => {
                                 .localeCompare(optionB.children.toLowerCase())
                             }
                           >
-                            <Option value="1">Mechanical Engineering</Option>
-                            <Option value="2">
+                            <Option value={1}>Mechanical Engineering</Option>
+                            <Option value={2}>
                               Computer Science Engineering
                             </Option>
-                            <Option value="3">Electrical Engineering</Option>
-                            <Option value="4">Civil Engineering</Option>
-                            <Option value="5">
+                            <Option value={3}>Electrical Engineering</Option>
+                            <Option value={4}>Civil Engineering</Option>
+                            <Option value={5}>
                               Instrumentation Engineering
                             </Option>
-                            <Option value="6">Chemical Engineering</Option>
+                            <Option value={6}>Chemical Engineering</Option>
                           </Select>
                         </Form.Item>
                       </Col>

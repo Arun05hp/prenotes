@@ -4,15 +4,16 @@ import { NavLink } from "react-router-dom";
 import { Context as AuthContext } from "../../context/AuthContext";
 import queryString from "query-string";
 import SignIn from "../Auth/Signin";
+import { MessageOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
   const { md } = useBreakpoint();
 
   const { state, logout } = useContext(AuthContext);
-  const { loginFlag } = state;
+  const { loginFlag, userData } = state;
   const [isModalVisible, setIsModalVisible] = useState(false);
-
+  console.log(userData);
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -60,19 +61,25 @@ const MenuItems = () => {
     </div>
   ) : (
     <Menu mode={md ? "horizontal" : "inline"}>
+      <Menu.Item key="/messages" onClick={() => logout()}>
+        <NavLink to="/messages">
+          <MessageOutlined />
+        </NavLink>
+      </Menu.Item>
+
       <SubMenu
         key="sub1"
         title={
           <>
             <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}>
-              U
+              {userData.name ? userData.name.charAt(0) : ""}
             </Avatar>
-            <span className="uname">Arun Kumar</span>
+            <span className="uname">{userData.name}</span>
           </>
         }
       >
-        <Menu.Item key="/profile">
-          <NavLink to="/myprofile">My Profile</NavLink>
+        <Menu.Item key="/myprofile/personalInfo">
+          <NavLink to="/myprofile/personalInfo">My Profile</NavLink>
         </Menu.Item>
         <Menu.Item key="/signout" onClick={() => logout()}>
           <NavLink to=""> Sign Out</NavLink>

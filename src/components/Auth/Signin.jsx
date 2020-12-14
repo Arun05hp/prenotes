@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Button, Form, Input, notification } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import http from "../../services/httpService";
@@ -11,7 +11,7 @@ const layout = {
 };
 
 const Signin = ({ handleCancel }) => {
-  const { login } = useContext(AuthContext);
+  const { login, getUserDetails } = useContext(AuthContext);
 
   const [form] = Form.useForm();
   const onFinish = (values) => {
@@ -23,19 +23,16 @@ const Signin = ({ handleCancel }) => {
       .then((res) => {
         handleCancel();
         form.resetFields();
-        console.log(res.token);
-        notification.success({
-          message: "Login Successful",
-          placement: "topRight",
-        });
-        login(true, res.token);
+        console.log(res.userDetails.token);
+        message.success("Login Successful", 3);
+        login(true, res.userDetails);
+        getUserDetails(res.userDetails.id);
       })
       .catch((err) => {
-        if (err.response.status === 400)
-          notification.error({
-            message: err.response.data.message,
-            placement: "topRight",
-          });
+        if (!err.response) return message.error("Network Error", 3);
+
+        if (err.response.status && err.response.status === 400)
+          message.error(err.response.data.message, 3);
       });
   };
   return (

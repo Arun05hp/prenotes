@@ -113,7 +113,8 @@
 
 .home_wrapper .hr {
   max-width: 80px;
-  border: 4px solid var(--primary-color);
+  height: 5px;
+  background-color: var(--primary-color);
   border-radius: 10px;
   margin: 0 auto;
 }
