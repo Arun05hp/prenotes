@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Drawer, Button } from "antd";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import MenuItems from "./MenuItems";
 import "./navbar.css";
 const Navbar = () => {
@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="app_container">
         <div className="navbar">
           <div className="logo">
-            <Link to="/">Prenotes</Link>
+            <NavLink to="/">Prenotes</NavLink>
           </div>
           <div className="navMenu">
             <div className="rightMenu">

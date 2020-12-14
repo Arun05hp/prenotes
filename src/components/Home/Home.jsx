@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Row, Card, Col, Input, Form } from "antd";
+import { Row, Card, Col, Input } from "antd";
 
 import Slider from "./UserSlider";
 import TableImg from "../../assets/images/boytable.svg";
@@ -12,6 +12,7 @@ import {
   CoffeeOutlined,
 } from "@ant-design/icons";
 import "./home.css";
+import Feedback from "./Feedback";
 
 const { Search } = Input;
 const Home = () => {
@@ -123,50 +124,7 @@ const Home = () => {
           <div className="hr" />
         </div>
         <Card>
-          <Form layout="vertical">
-            <Row gutter={[32, 16]}>
-              <Col md={12} xs={24}>
-                <Form.Item
-                  label="Name"
-                  name="name"
-                  rules={[
-                    { required: true, message: "Please Input your Name!" },
-                  ]}
-                >
-                  <Input size="large" />
-                </Form.Item>
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[
-                    { required: true, message: "Email Required!" },
-                    { type: "email", message: "Email is not valid Email" },
-                  ]}
-                >
-                  <Input size="large" />
-                </Form.Item>
-                <Form.Item label="Contact No." name="cno">
-                  <Input size="large" />
-                </Form.Item>
-              </Col>
-              <Col md={12} xs={24}>
-                <div className="textarea_wrapper">
-                  <Form.Item
-                    label="Your Message"
-                    name="msg"
-                    rules={[
-                      { required: true, message: "Please Input your Message!" },
-                    ]}
-                  >
-                    <Input.TextArea size="large" />
-                  </Form.Item>
-                </div>
-              </Col>
-            </Row>
-            <div className="feedBtn">
-              <Button htmlType="submit">Send Message</Button>
-            </div>
-          </Form>
+          <Feedback />
         </Card>
       </section>
       <section className="made_wrapper">
