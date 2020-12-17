@@ -72,7 +72,7 @@ const Signup = () => {
     };
     delete data.batch;
     http
-      .post("/user/signup", data)
+      .post("user/signup", data)
       .then((res) => {
         return res.data;
       })

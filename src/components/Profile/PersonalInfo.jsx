@@ -11,10 +11,16 @@ import {
   message,
   Modal,
   Select,
+  Upload,
 } from "antd";
 import { Context as AuthContext } from "../../context/AuthContext";
 import http from "../../services/httpService";
-import { UserOutlined, EditOutlined } from "@ant-design/icons";
+import {
+  UserOutlined,
+  LoadingOutlined,
+  PlusOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import moment from "moment";
 const layout = {
   labelCol: { span: 24 },
@@ -24,11 +30,37 @@ const { RangePicker } = DatePicker;
 const { Option } = Select;
 const dateFormat = "DD/MM/YYYY";
 
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  if (!isJpgOrPng) {
+    message.error("You can only upload JPG/PNG file!");
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    message.error("Image must smaller than 2MB!");
+  }
+  return isJpgOrPng && isLt2M;
+}
+
 const PersonalInfo = () => {
   const { state, getUserDetails } = useContext(AuthContext);
   const { userData } = state;
   const [visibleInfo, setVisibleInfo] = useState(false);
   const [visibleEdu, setVisibleEdu] = useState(false);
+  const [visiblePic, setVisiblePic] = useState(false);
+  const [imageData, setImageData] = useState({
+    loading: false,
+    imgUrl: null,
+  });
+  const BASEURL = process.env.REACT_APP_BASE_URL;
+  const actionUrl = BASEURL + "user/profile/" + userData.iduser;
+
   const [infoForm] = Form.useForm();
   const [eduForm] = Form.useForm();
   const [basicForm] = Form.useForm();
@@ -64,7 +96,7 @@ const PersonalInfo = () => {
     console.log("Success:", values);
 
     http
-      .put("/user/updateprofile/" + userData.iduser, values)
+      .put("user/updateprofile/" + userData.iduser, values)
       .then((res) => {
         return res.data;
       })
@@ -86,7 +118,7 @@ const PersonalInfo = () => {
     };
     delete data.batch;
     http
-      .put("/user/updateEdu/" + userData.iduser, data)
+      .put("user/updateEdu/" + userData.iduser, data)
       .then((res) => {
         return res.data;
       })
@@ -99,6 +131,29 @@ const PersonalInfo = () => {
         console.log(err);
       });
   };
+
+  const handleChange = (info) => {
+    setImageData({ loading: true, imgUrl: null });
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj, (imageUrl) =>
+        setImageData({ loading: false, imgUrl: imageUrl })
+      );
+      getUserDetails(userData.iduser);
+      message.success("Profile Image Updated Successfully", 3);
+      setVisiblePic(false);
+    }
+    if (info.file.status === "error") {
+      message.error("Failed", 3);
+    }
+  };
+
+  const uploadButton = (
+    <div>
+      {imageData.loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   useEffect(() => {
     console.log(userData);
@@ -129,9 +184,15 @@ const PersonalInfo = () => {
         <div className="avatar_wrapper">
           <Avatar
             size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 100, xxl: 100 }}
+            src={
+              userData.profileImg != null ? BASEURL + userData.profileImg : null
+            }
             icon={<UserOutlined />}
+            key={userData.profileImg}
           />
-          <Button className="btn">Change Photo</Button>
+          <Button className="btn" onClick={() => setVisiblePic(true)}>
+            Change Photo
+          </Button>
         </div>
         <div className="heading_wrap">
           <h3>Basic Information</h3>
@@ -478,6 +539,34 @@ const PersonalInfo = () => {
             </Col>
           </Row>
         </Form>
+      </Modal>
+
+      <Modal
+        visible={visiblePic}
+        title="Change Profile Image"
+        onCancel={() => setVisiblePic(false)}
+        footer={null}
+        style={{ textAlign: "center", maxWidth: "300px" }}
+      >
+        <Upload
+          name="photo"
+          listType="picture-card"
+          className="avatar-uploader"
+          showUploadList={false}
+          action={actionUrl}
+          beforeUpload={beforeUpload}
+          onChange={handleChange}
+        >
+          {imageData.imgUrl ? (
+            <img
+              src={imageData.imgUrl}
+              alt="avatar"
+              style={{ width: "100%" }}
+            />
+          ) : (
+            uploadButton
+          )}
+        </Upload>
       </Modal>
     </div>
   );

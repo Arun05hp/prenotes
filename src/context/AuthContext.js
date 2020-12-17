@@ -6,7 +6,7 @@ const authReducer = (state, action) => {
     case "login":
       return { ...state, loginFlag: action.payload };
     case "logout":
-      return { ...state, loginFlag: false };
+      return { ...state, loginFlag: false, userData: {} };
     case "setUser":
       console.log("action.payload", action.payload);
       return { ...state, userData: action.payload };
@@ -68,6 +68,7 @@ const logout = (dispatch) => () => {
   console.log("logout");
   try {
     localStorage.clear();
+
     dispatch({ type: "logout" });
   } catch (error) {
     console.log("err", error);

@@ -8,6 +8,7 @@ import { MessageOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
+  const BASEURL = process.env.REACT_APP_BASE_URL;
   const { md } = useBreakpoint();
 
   const { state, logout } = useContext(AuthContext);
@@ -71,7 +72,14 @@ const MenuItems = () => {
         key="sub1"
         title={
           <>
-            <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}>
+            <Avatar
+              style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+              src={
+                userData.profileImg != null
+                  ? BASEURL + userData.profileImg
+                  : null
+              }
+            >
               {userData.name ? userData.name.charAt(0) : ""}
             </Avatar>
             <span className="uname">{userData.name}</span>

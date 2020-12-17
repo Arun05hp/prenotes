@@ -16,7 +16,7 @@ const Signin = ({ handleCancel }) => {
   const [form] = Form.useForm();
   const onFinish = (values) => {
     http
-      .post("/user/signin", values)
+      .post("user/signin", values)
       .then((res) => {
         return res.data;
       })
