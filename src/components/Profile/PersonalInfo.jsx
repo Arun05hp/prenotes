@@ -197,7 +197,7 @@ const PersonalInfo = () => {
       <div className="innerWrapper">
         <div className="avatar_wrapper">
           <Avatar
-            size={{ xs: 24, sm: 32, md: 40, lg: 64, xl: 100, xxl: 100 }}
+            size={{ xs: 64, sm: 64, md: 64, lg: 64, xl: 100, xxl: 100 }}
             src={
               userData.profileImg != null ? BASEURL + userData.profileImg : null
             }
