@@ -58,6 +58,7 @@ const PersonalInfo = () => {
     loading: false,
     imgUrl: null,
   });
+  const [disabledAddr, setDisabledAddr] = useState(0);
   const BASEURL = process.env.REACT_APP_BASE_URL;
   const actionUrl = BASEURL + "user/profile/" + userData.iduser;
 
@@ -70,6 +71,11 @@ const PersonalInfo = () => {
     setVisibleInfo(false);
     setVisibleEdu(false);
   };
+
+  const handleIsHosteler = (e) => {
+    setDisabledAddr(e.target.value);
+  };
+
   const handleBasicInfo = () => {
     basicForm.setFieldsValue({
       name: userData.name,
@@ -84,11 +90,13 @@ const PersonalInfo = () => {
     edForm.setFieldsValue({
       institute: userData.institute,
       branch: userData.branch,
-      sem: Number(userData.sem),
+      sem: userData.sem,
       batch: [moment(userData.batchStart), moment(userData.batchEnd)],
       regno: userData.regno,
       hosteler: userData.hosteler,
+      hostelAddress: userData.hosteler ? userData.hostelAddress : " ",
     });
+
     setVisibleEdu(true);
   };
 
@@ -102,6 +110,7 @@ const PersonalInfo = () => {
       })
       .then((res) => {
         getUserDetails(res.userId);
+        basicForm.resetFields();
         setVisibleInfo(false);
         message.success("Profile Updated Successfully", 3);
       })
@@ -113,8 +122,10 @@ const PersonalInfo = () => {
     console.log("Success:", values);
     let data = {
       ...values,
+
       batchStart: values.batch[0],
       batchEnd: values.batch[1],
+      hostelAddress: values.hosteler ? values.hostelAddress : null,
     };
     delete data.batch;
     http
@@ -124,6 +135,7 @@ const PersonalInfo = () => {
       })
       .then((res) => {
         getUserDetails(res.userId);
+        edForm.resetFields();
         setVisibleEdu(false);
         message.success("Education Updated Successfully", 3);
       })
@@ -165,15 +177,17 @@ const PersonalInfo = () => {
         gender: userData.gender,
         email: userData.email,
       });
+      setDisabledAddr(userData.hosteler);
       eduForm.setFieldsValue({
         institute: userData.institute,
         branch: userData.branch,
-        sem: userData.sem,
+        sem: Number(userData.sem),
         batch: `${moment(userData.batchStart).format("YYYY")} - ${moment(
           userData.batchEnd
         ).format("YYYY")}`,
         regno: userData.regno,
         hosteler: userData.hosteler ? "Yes" : "No",
+        hostelAddress: userData.hosteler ? userData.hostelAddress : " ",
       });
     }
   }, [userData]);
@@ -269,7 +283,16 @@ const PersonalInfo = () => {
 
             <Col md={12} xs={24}>
               <Form.Item label="Semester" name="sem">
-                <Input size="large" disabled />
+                <Select size="large">
+                  <Option value={1}>1</Option>
+                  <Option value={2}>2</Option>
+                  <Option value={3}>3</Option>
+                  <Option value={4}>4</Option>
+                  <Option value={5}>5</Option>
+                  <Option value={6}>6</Option>
+                  <Option value={7}>7</Option>
+                  <Option value={8}>8</Option>
+                </Select>
               </Form.Item>
             </Col>
             <Col md={12} xs={24}>
@@ -486,15 +509,18 @@ const PersonalInfo = () => {
                     required: true,
                     message: "Required!",
                   },
-                  {
-                    minLength: 1,
-                    maxLength: 1,
-                    pattern: "^[0-8]{1}$",
-                    message: "Number Only 1-8",
-                  },
                 ]}
               >
-                <Input type="tel" placeholder="1" size="large" />
+                <Select size="large">
+                  <Option value={1}>1</Option>
+                  <Option value={2}>2</Option>
+                  <Option value={3}>3</Option>
+                  <Option value={4}>4</Option>
+                  <Option value={5}>5</Option>
+                  <Option value={6}>6</Option>
+                  <Option value={7}>7</Option>
+                  <Option value={8}>8</Option>
+                </Select>
               </Form.Item>
             </Col>
             <Col md={12} xs={24}>
@@ -531,10 +557,25 @@ const PersonalInfo = () => {
                   optionType="button"
                   buttonStyle="solid"
                   size="large"
+                  onChange={handleIsHosteler}
                 >
                   <Radio.Button value={1}>Yes</Radio.Button>
                   <Radio.Button value={0}>No</Radio.Button>
                 </Radio.Group>
+              </Form.Item>
+            </Col>
+
+            <Col md={12} xs={24}>
+              <Form.Item
+                name="hostelAddress"
+                label="Hostel Address"
+                rules={[{ required: disabledAddr, message: "Required!" }]}
+              >
+                <Input.TextArea
+                  maxLength={250}
+                  rows={2}
+                  disabled={!disabledAddr}
+                />
               </Form.Item>
             </Col>
           </Row>

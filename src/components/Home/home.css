@@ -227,3 +227,67 @@
   background-color: var(--primary-color);
   color: var(--white);
 }
+
+@media screen and (max-width: 568px) {
+  .home_wrapper .search_wrapper {
+    padding: 40px 10px;
+    background-size: 40px, 50px;
+    background-position: right bottom, left 98%;
+  }
+  .home_wrapper .search_wrapper .title_wrapper {
+    padding-bottom: 60px;
+    background-size: 60px;
+  }
+  .home_wrapper .search_wrapper .title_wrapper .title,
+  .home_wrapper .prenotes_wrapper .title,
+  .home_wrapper .user_wrapper .title,
+  .home_wrapper .feed_wrapper .title {
+    font-size: 24px;
+  }
+  .home_wrapper .title_wrapper .subTitle {
+    font-size: 16px;
+  }
+  .home_wrapper .prenotes_wrapper {
+    background-image: url("../../assets/images/mobheader.svg");
+    background-size: 100%;
+    padding: 50px 10px 10px 10px;
+  }
+  .home_wrapper .prenotes_wrapper .title,
+  .home_wrapper .feed_wrapper .title {
+    background-size: 60px;
+    background-position: right 10px;
+  }
+  .home_wrapper .prenotes_wrapper .title_wrapper,
+  .home_wrapper .user_wrapper .title_wrapper,
+  .home_wrapper .feed_wrapper .title_wrapper {
+    margin: 30px 0;
+  }
+  .home_wrapper .user_wrapper .title {
+    background-size: 60px;
+    background-position: left 10px;
+  }
+  .home_wrapper .feed_wrapper {
+    padding: 0 10px;
+  }
+  .home_wrapper .feed_wrapper .ant-card-body {
+    padding: 25px;
+  }
+  .home_wrapper .feed_wrapper .textarea_wrapper,
+  .home_wrapper .feed_wrapper .textarea_wrapper .ant-form-item,
+  .home_wrapper
+    .feed_wrapper
+    .textarea_wrapper
+    .ant-form-item-control-input-content,
+  .home_wrapper .feed_wrapper .textarea_wrapper textarea {
+    flex-direction: row;
+  }
+  .home_wrapper .made_wrapper h2 {
+    font-size: 18px;
+  }
+  .home_wrapper .made_wrapper {
+    padding-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+}

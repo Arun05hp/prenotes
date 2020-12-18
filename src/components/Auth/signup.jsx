@@ -330,15 +330,18 @@ const Signup = () => {
                               required: true,
                               message: "Required!",
                             },
-                            {
-                              minLength: 1,
-                              maxLength: 1,
-                              pattern: "^[0-8]{1}$",
-                              message: "Number Only 1-8",
-                            },
                           ]}
                         >
-                          <Input type="tel" placeholder="1" size="large" />
+                          <Select size="large">
+                            <Option value={1}>1</Option>
+                            <Option value={2}>2</Option>
+                            <Option value={3}>3</Option>
+                            <Option value={4}>4</Option>
+                            <Option value={5}>5</Option>
+                            <Option value={6}>6</Option>
+                            <Option value={7}>7</Option>
+                            <Option value={8}>8</Option>
+                          </Select>
                         </Form.Item>
                       </Col>
                       <Col md={12} xs={24}>

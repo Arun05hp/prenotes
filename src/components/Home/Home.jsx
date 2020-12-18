@@ -29,10 +29,8 @@ const Home = () => {
 
                 <div className="sub_wrapper">
                   <p className="subTitle">
-                    Upload and share notes with ease. Prenotes helps you
-                  </p>
-                  <p className="subTitle">
-                    to find ongoing tuition classes inside campus.
+                    Upload and share notes with ease. Prenotes helps you to find
+                    ongoing tuition classes inside campus.
                   </p>
                 </div>
                 <Search
