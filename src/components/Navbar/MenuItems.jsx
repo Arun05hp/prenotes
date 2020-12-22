@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Menu, Modal, Grid } from "antd";
+import { Avatar, Badge, Button, Menu, Modal, Grid } from "antd";
 import { NavLink } from "react-router-dom";
 import { Context as AuthContext } from "../../context/AuthContext";
 import queryString from "query-string";
 import SignIn from "../Auth/Signin";
-import { MessageOutlined } from "@ant-design/icons";
+import { BellOutlined, MessageOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
@@ -14,7 +14,7 @@ const MenuItems = () => {
   const { state, logout } = useContext(AuthContext);
   const { loginFlag, userData } = state;
   const [isModalVisible, setIsModalVisible] = useState(false);
-  console.log(userData);
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -62,9 +62,53 @@ const MenuItems = () => {
     </div>
   ) : (
     <Menu mode={md ? "horizontal" : "inline"}>
-      <Menu.Item key="/messages" onClick={() => logout()}>
+      <SubMenu key="/notes" title="Notes">
+        <Menu.Item key="/notes/search">
+          <NavLink to="/notes/search">Search</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/notes/upload">
+          <NavLink to="/notes/upload">Upload</NavLink>
+        </Menu.Item>
+      </SubMenu>
+
+      <SubMenu key="/books" title="Books">
+        <Menu.Item key="/books/buy">
+          <NavLink to="/books/buy">Buy</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/books/sell">
+          <NavLink to="/books/sell">Sell</NavLink>
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="/exampapers" title="Exam Papers">
+        <Menu.Item key="/exampapers/search">
+          <NavLink to="/exampapers/search">Search</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/exampapers/upload">
+          <NavLink to="/exampapers/upload">Upload</NavLink>
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="/tuitions" title="Tuitions">
+        <Menu.Item key="/tuitions/search">
+          <NavLink to="/tuitions/search">Search</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/tuitions/create">
+          <NavLink to="/tuitions/create">Create</NavLink>
+        </Menu.Item>
+      </SubMenu>
+
+      <Menu.Item key="/notification">
+        <NavLink to="/notification">
+          <Badge count={0} dot>
+            <BellOutlined />
+          </Badge>
+        </NavLink>
+      </Menu.Item>
+
+      <Menu.Item key="/messages">
         <NavLink to="/messages">
-          <MessageOutlined />
+          <Badge count={1} dot>
+            <MessageOutlined />
+          </Badge>
         </NavLink>
       </Menu.Item>
 

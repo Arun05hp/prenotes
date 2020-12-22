@@ -168,7 +168,6 @@ const PersonalInfo = () => {
   );
 
   useEffect(() => {
-    console.log(userData);
     if (userData) {
       infoForm.setFieldsValue({
         name: userData.name,
@@ -191,7 +190,7 @@ const PersonalInfo = () => {
       });
     }
   }, [userData]);
-  console.log(userData);
+
   return (
     <div>
       <div className="innerWrapper">
@@ -263,8 +262,6 @@ const PersonalInfo = () => {
                     Sant Longowal Institute of Engineering and Technology
                   </Option>
                   <Option value={2}>Panjab University</Option>
-                  {/* <Option value={3}>Communicated</Option>
-                      <Option value={4}>Identified</Option> */}
                 </Select>
               </Form.Item>
             </Col>
@@ -283,7 +280,7 @@ const PersonalInfo = () => {
 
             <Col md={12} xs={24}>
               <Form.Item label="Semester" name="sem">
-                <Select size="large">
+                <Select size="large" disabled>
                   <Option value={1}>1</Option>
                   <Option value={2}>2</Option>
                   <Option value={3}>3</Option>

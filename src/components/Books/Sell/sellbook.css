@@ -1,0 +1,19 @@
+.sell_wrapper {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+.sell_wrapper .avatar-uploader {
+  text-align: center;
+}
+
+.sell_wrapper .btn_wrapper Button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px 0;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 600;
+}

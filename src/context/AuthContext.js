@@ -8,7 +8,6 @@ const authReducer = (state, action) => {
     case "logout":
       return { ...state, loginFlag: false, userData: {} };
     case "setUser":
-      console.log("action.payload", action.payload);
       return { ...state, userData: action.payload };
     default:
       return state;
@@ -34,7 +33,6 @@ const tryLocalSignin = (dispatch) => async () => {
 };
 
 const login = (dispatch) => (flag, user) => {
-  console.log("req", flag, user);
   try {
     SecureStorage.setItem("userData", JSON.stringify(user));
     SecureStorage.setItem("loginFlag", JSON.stringify(flag));
@@ -45,7 +43,6 @@ const login = (dispatch) => (flag, user) => {
 };
 
 const getUserDetails = (dispatch) => (userId) => {
-  console.log("userId", userId);
   try {
     http
       .get("/user/userDetails/" + userId)
