@@ -1,0 +1,19 @@
+.booksSearch_body {
+  padding: 24px 15px;
+}
+.booksSearch_body .itemWrapper .ant-avatar {
+  width: 100px;
+  height: 100px;
+}
+.booksSearch_body .itemWrapper .ant-image-img,
+.booksSearch_body .itemWrapper .ant-image {
+  width: 100px;
+  height: 100px;
+}
+.booksSearch_body .itemWrapper .ant-card-body {
+  padding: 12px;
+}
+.booksSearch_body .itemWrapper h3,
+.booksSearch_body .itemWrapper p {
+  margin-bottom: 2px;
+}

@@ -8,7 +8,7 @@ const Feedback = () => {
     console.log(val);
     setIsLoading(true);
     http
-      .post("/prenotes/feedback", val)
+      .post("prenotes/feedback", val)
       .then((res) => {
         return res.data;
       })

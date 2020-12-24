@@ -31,16 +31,28 @@ nav {
 .navbar .rightMenu ul .ant-menu-item,
 .navbar .rightMenu ul .ant-menu-submenu {
   padding: 10px 0;
-  margin-left: 40px;
 }
-.navbar .rightMenu ul li {
+.navbar .rightMenu ul.ant-menu-horizontal li {
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
+  border-bottom: none !important;
+  border-bottom-style: none !important;
+  margin: 0;
 }
+
+.navbar .rightMenu ul li:not(:last-child) {
+  padding: 15px 18px;
+}
+
 .navbar .rightMenu ul li span {
   font-size: 14px;
   font-weight: 600;
+}
+
+.navbar .rightMenu ul li .ant-badge .anticon {
+  margin: 0;
+  font-size: 16px;
 }
 
 .navbar .hamburger {

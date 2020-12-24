@@ -16,3 +16,15 @@ footer h4 {
   font-size: 16px;
   font-weight: 600;
 }
+
+@media screen and (max-width: 768px) {
+  footer .footer {
+    background-image: url("../../assets/images/mobfoot.svg");
+    background-size: cover;
+    background-position: center;
+    padding: 40px 10px 20px 10px;
+  }
+  footer h4 {
+    font-size: 14px;
+  }
+}

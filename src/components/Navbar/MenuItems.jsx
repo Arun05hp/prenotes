@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Button, Menu, Modal, Grid } from "antd";
+import { Avatar, Badge, Button, Menu, Modal, Grid } from "antd";
 import { NavLink } from "react-router-dom";
 import { Context as AuthContext } from "../../context/AuthContext";
 import queryString from "query-string";
 import SignIn from "../Auth/Signin";
+import { BellOutlined, MessageOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
 const MenuItems = () => {
+  const BASEURL = process.env.REACT_APP_BASE_URL;
   const { md } = useBreakpoint();
 
   const { state, logout } = useContext(AuthContext);
-  const { loginFlag } = state;
+  const { loginFlag, userData } = state;
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const showModal = () => {
@@ -60,19 +62,76 @@ const MenuItems = () => {
     </div>
   ) : (
     <Menu mode={md ? "horizontal" : "inline"}>
+      <SubMenu key="/notes" title="Notes">
+        <Menu.Item key="/notes/search">
+          <NavLink to="/notes/search">Search</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/notes/upload">
+          <NavLink to="/notes/upload">Upload</NavLink>
+        </Menu.Item>
+      </SubMenu>
+
+      <SubMenu key="/books" title="Books">
+        <Menu.Item key="/books/buy">
+          <NavLink to="/books/buy">Buy</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/books/sell">
+          <NavLink to="/books/sell">Sell</NavLink>
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="/exampapers" title="Exam Papers">
+        <Menu.Item key="/exampapers/search">
+          <NavLink to="/exampapers/search">Search</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/exampapers/upload">
+          <NavLink to="/exampapers/upload">Upload</NavLink>
+        </Menu.Item>
+      </SubMenu>
+      <SubMenu key="/tuitions" title="Tuitions">
+        <Menu.Item key="/tuitions/search">
+          <NavLink to="/tuitions/search">Search</NavLink>
+        </Menu.Item>
+        <Menu.Item key="/tuitions/create">
+          <NavLink to="/tuitions/create">Create</NavLink>
+        </Menu.Item>
+      </SubMenu>
+
+      <Menu.Item key="/notification">
+        <NavLink to="/notification">
+          <Badge count={0} dot>
+            <BellOutlined />
+          </Badge>
+        </NavLink>
+      </Menu.Item>
+
+      <Menu.Item key="/messages">
+        <NavLink to="/messages">
+          <Badge count={1} dot>
+            <MessageOutlined />
+          </Badge>
+        </NavLink>
+      </Menu.Item>
+
       <SubMenu
         key="sub1"
         title={
           <>
-            <Avatar style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}>
-              U
+            <Avatar
+              style={{ color: "#f56a00", backgroundColor: "#fde3cf" }}
+              src={
+                userData.profileImg != null
+                  ? BASEURL + userData.profileImg
+                  : null
+              }
+            >
+              {userData.name ? userData.name.charAt(0) : ""}
             </Avatar>
-            <span className="uname">Arun Kumar</span>
+            <span className="uname">{userData.name}</span>
           </>
         }
       >
-        <Menu.Item key="/profile">
-          <NavLink to="/myprofile">My Profile</NavLink>
+        <Menu.Item key="/myprofile/personalInfo">
+          <NavLink to="/myprofile/personalInfo">My Profile</NavLink>
         </Menu.Item>
         <Menu.Item key="/signout" onClick={() => logout()}>
           <NavLink to=""> Sign Out</NavLink>

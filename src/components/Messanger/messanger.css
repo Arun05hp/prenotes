@@ -1,0 +1,111 @@
+.msg_wrapper {
+  padding: 24px 0;
+}
+
+.msg_wrapper .userlist header {
+  background-color: var(--border-color);
+  padding: 19px 18px;
+  border-radius: 5px;
+}
+
+.msg_wrapper .userlist header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.msg_wrapper .userlist_body .user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.msg_wrapper .userlist_body .user p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  margin-left: 10px;
+}
+
+.msg_wrapper .userlist,
+.msg_wrapper .msg_box {
+  height: 100%;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08), 1px 0px 2px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  background-color: #f3f3f3;
+}
+
+.msg_wrapper .msg_box {
+  position: relative;
+  padding-bottom: 50px;
+}
+.msg_wrapper .msg_box header {
+  background-color: var(--border-color);
+  padding: 16px 18px;
+  border-radius: 5px;
+}
+
+.msg_wrapper .msg_box .user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.msg_wrapper .msg_box header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 16px;
+  color: var(--white);
+}
+.msg_wrapper .msg_box header .user p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  margin-left: 10px;
+}
+
+.msg_wrapper .chat_container {
+  padding: 18px;
+}
+
+.msg_wrapper .chat_container .form {
+  display: flex;
+  align-items: center;
+}
+
+.msg_wrapper .chat_container .form .ant-form-item {
+  margin: 0;
+  flex: 1;
+  margin-right: 15px;
+}
+.msg_wrapper .chat_container .form .ant-form-item .ant-input {
+  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+  resize: none;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);
+  height: 50px;
+}
+
+.msg_wrapper .chat_container .form {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 15px;
+}
+.msg_wrapper .chat_container .form button {
+  height: 50px;
+  width: 50px;
+  font-size: 18px;
+  background-color: var(--border-color);
+  color: var(--white);
+}

@@ -1,9 +1,8 @@
 .myuploads {
   max-width: 800px;
   margin: 0 auto;
-  padding: 24px 0;
 }
-.myuploads .innerWrapper .ant-avatar {
+.myuploads .itemWrapper .ant-avatar {
   width: 100%;
   height: 100%;
 }

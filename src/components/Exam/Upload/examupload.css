@@ -1,0 +1,32 @@
+.exam_wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 10px;
+}
+
+.exam_wrapper .ant-upload-list-item {
+  background-color: rgba(51, 51, 51, 0.1);
+  color: var(--black);
+  font-weight: 600;
+  padding: 10px;
+  height: auto;
+}
+.exam_wrapper .ant-upload-list-item:hover .ant-upload-list-item-info {
+  background-color: transparent;
+}
+.exam_wrapper .ant-upload-list-item .anticon-delete {
+  color: var(--red);
+}
+.exam_wrapper .btn_wrapper {
+  text-align: center;
+}
+.exam_wrapper .btn_wrapper Button {
+  margin: 10px 0;
+  width: 100%;
+  max-width: 50%;
+  padding: 14px 0;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 600;
+}
