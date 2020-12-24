@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react";
-import {
-  Avatar,
-  Image,
-  Button,
-  Card,
-  Col,
-  Row,
-  Form,
-  Input,
-  message,
-  Select,
-} from "antd";
+import React, { useEffect, useState, useContext } from "react";
+import { Button, Card, Col, Row, Form, Input, message } from "antd";
+
+import { Context as AuthContext } from "../../../context/AuthContext";
+import http from "../../../services/httpService";
 import bg from "../../../assets/bg/books.png";
 
-import http from "../../../services/httpService";
 import "../../Notes/Search/notessearch.css";
 import "./buybook.css";
 import { SearchOutlined } from "@ant-design/icons";
 
 const BuyBook = () => {
   let BASEURL = process.env.REACT_APP_BASE_URL;
+  const { state } = useContext(AuthContext);
+  const { userData } = state;
   const [booksData, setBooksData] = useState([]);
   const [form] = Form.useForm();
   const onFinish = (val) => {
@@ -49,6 +42,36 @@ const BuyBook = () => {
       })
       .then((res) => {
         setBooksData(res.booksData);
+      })
+      .catch((err) => {
+        if (!err.response) return message.error("Network Error", 3);
+        if (err.response.status && err.response.status === 400)
+          message.error(err.response.data.message, 3);
+      });
+  };
+
+  const handleReq = (data) => {
+    if (!userData.iduser) {
+      return;
+    }
+    let formData = {
+      senderId: userData.iduser,
+      senderName: userData.name,
+      receiverId: data.iduser,
+      receiverStatus: 0,
+      forid: data.idbook,
+      title: data.bookName,
+      query: null,
+      for: 1,
+      status: 0,
+    };
+    http
+      .post("notification/notifi", formData)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        message.success("Your request was sent successfully");
       })
       .catch((err) => {
         if (!err.response) return message.error("Network Error", 3);
@@ -105,23 +128,26 @@ const BuyBook = () => {
           {booksData.length > 0
             ? booksData.map((item) => {
                 return (
-                  <Col md={12} xs={24}>
+                  <Col md={8} xs={24}>
                     <Card className="itemWrapper">
-                      <Row gutter={8}>
-                        <Col md={6} xs={6}>
-                          <Avatar
-                            shape="square"
-                            src={<Image src={BASEURL + item.fileLink} />}
-                          />
-                        </Col>
-                        <Col md={18} xs={18}>
-                          <h3>{item.bookName}</h3>
-                          <p>
-                            {item.authorName} by {item.publisherName}
-                          </p>
-                          <h3>Rs {item.price}</h3>
-                        </Col>
-                      </Row>
+                      <div className="book_wrapper">
+                        <img className="img" src={BASEURL + item.fileLink} />
+
+                        <div className="book_body">
+                          <div className="dec">
+                            <p className="title">{item.bookName}</p>
+                            <p className="subtitle">{item.authorName}</p>
+                            <p className="subtitle"> {item.publisherName} </p>
+                          </div>
+
+                          <p className="price">₹ {item.price}</p>
+                        </div>
+                      </div>
+                      <div className="btn-wrapper">
+                        <Button onClick={() => handleReq(item)}>
+                          Send Request
+                        </Button>
+                      </div>
                     </Card>
                   </Col>
                 );

@@ -13,6 +13,7 @@ import NotesSearch from "../components/Notes/Search/NotesSearch.jsx";
 import NotesUpload from "../components/Notes/Upload/NotesUpload.jsx";
 import BuyBook from "../components/Books/Buy/BuyBook";
 import SellBook from "../components/Books/Sell/SellBook";
+import Notification from "../components/Notification/Notification";
 const Navigation = () => {
   const { tryLocalSignin, getUserDetails } = useContext(AuthContext);
 
@@ -38,6 +39,7 @@ const Navigation = () => {
           <Route path="/myprofile/personalInfo" exact component={Profile} />
           <Route path="/myprofile/myuploads" exact component={Profile} />
           <Route path="/myprofile/changepassword" exact component={Profile} />
+          <Route path="/notification" component={Notification} />
           <Route path="/messages" component={Messanger} />
           <Route path="/notes/search" component={NotesSearch} />
           <Route path="/notes/upload" component={NotesUpload} />

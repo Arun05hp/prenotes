@@ -1,19 +1,76 @@
 .booksSearch_body {
   padding: 24px 15px;
+  background-color: #fafafa;
 }
+.booksSearch_body .itemWrapper {
+  border-radius: 8px;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
 .booksSearch_body .itemWrapper .ant-avatar {
   width: 100px;
   height: 100px;
 }
-.booksSearch_body .itemWrapper .ant-image-img,
-.booksSearch_body .itemWrapper .ant-image {
+.booksSearch_body .itemWrapper .img {
   width: 100px;
   height: 100px;
 }
+
 .booksSearch_body .itemWrapper .ant-card-body {
-  padding: 12px;
+  padding: 0;
 }
+
 .booksSearch_body .itemWrapper h3,
 .booksSearch_body .itemWrapper p {
   margin-bottom: 2px;
+}
+
+.booksSearch_body .itemWrapper .book_wrapper {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 12px;
+}
+
+.booksSearch_body .book_wrapper .book_body {
+  justify-self: center;
+  padding-left: 24px;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.booksSearch_body .book_wrapper .book_body .title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: var(--black);
+}
+
+.booksSearch_body .book_wrapper .book_body .subtitle {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  color: var(--black);
+}
+
+.booksSearch_body .book_wrapper .book_body .price {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: var(--border-color);
+}
+
+.booksSearch_body .itemWrapper .btn-wrapper button {
+  width: 100%;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 14px;
+  padding: 14px 0;
+  border-radius: 0 0 8px 8px;
 }

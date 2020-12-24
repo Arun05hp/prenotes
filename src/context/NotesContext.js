@@ -6,6 +6,7 @@ const notesReducer = (state, action) => {
       return { ...state, notesData: action.payload };
     case "setExampaper":
       return { ...state, examData: action.payload };
+
     default:
       return state;
   }
