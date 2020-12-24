@@ -42,8 +42,8 @@ const Navigation = () => {
           <Route path="/notes/search" component={NotesSearch} />
           <Route path="/notes/upload" component={NotesUpload} />
 
-          <Route path="/exam/search" component={ExamSearch} />
-          <Route path="/exam/upload" component={ExamUpload} />
+          <Route path="/exampapers/search" component={ExamSearch} />
+          <Route path="/exampapers/upload" component={ExamUpload} />
           <Route path="/books/buy" component={BuyBook} />
           <Route path="/books/sell" component={SellBook} />
           <Route path="/messages" component={Messanger} />

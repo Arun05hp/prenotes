@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Col, Row, Form, Input, message, Select } from "antd";
-import { NavLink } from "react-router-dom";
 import bg from "../../../assets/bg/books.png";
-import { SearchOutlined } from "@ant-design/icons";
+
 import http from "../../../services/httpService";
 import "./notessearch.css";
-import { FilePdfOutlined } from "@ant-design/icons";
+import { SearchOutlined, FilePdfOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
 function getCategory(id) {
