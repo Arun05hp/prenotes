@@ -4,6 +4,8 @@ const notesReducer = (state, action) => {
   switch (action.type) {
     case "setNotes":
       return { ...state, notesData: action.payload };
+    case "setExampaper":
+      return { ...state, examData: action.payload };
     default:
       return state;
   }
@@ -28,8 +30,27 @@ const getNotes = (dispatch) => (userId) => {
   }
 };
 
+const getExampaper = (dispatch) => (userId) => {
+  try {
+    http
+      .get("exam/exampaper/" + userId)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch({ type: "setExampaper", payload: res.examData });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    console.log("err", error);
+  }
+};
+
 export const { Provider, Context } = createDataContext(
   notesReducer,
-  { getNotes },
-  { notesData: [] }
+  { getNotes, getExampaper },
+  { notesData: [], examData: [] }
 );

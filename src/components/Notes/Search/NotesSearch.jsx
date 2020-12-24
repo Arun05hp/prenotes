@@ -25,7 +25,7 @@ function getCategory(id) {
   }
 }
 const NotesSearch = () => {
-  let BASEURL = "http://localhost:5000/";
+  let BASEURL = process.env.REACT_APP_BASE_URL;
   const [notesData, setNotesData] = useState([]);
   const [form] = Form.useForm();
   const onFinish = (val) => {
