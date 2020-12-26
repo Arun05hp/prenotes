@@ -6,13 +6,12 @@ const SocketContext = React.createContext();
 export function useSocket() {
   return useContext(SocketContext);
 }
-
+let BASEURL = process.env.REACT_APP_BASE_URL;
 export function SocketProvider({ id, children }) {
-  let BASEURL = process.env.REACT_APP_BASE_URL;
   const [socket, setSocket] = useState();
 
   useEffect(() => {
-    const newSocket = io("http://localhost:5000", { query: { id } });
+    const newSocket = io(BASEURL, { query: { id } });
     setSocket(newSocket);
 
     return () => newSocket.close();
