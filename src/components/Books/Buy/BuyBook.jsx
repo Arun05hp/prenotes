@@ -34,9 +34,9 @@ const BuyBook = () => {
       });
   };
 
-  const getAllBooks = () => {
+  const getAllBooks = (id) => {
     http
-      .get("upload/allBooks")
+      .get("upload/allBooks/" + id)
       .then((res) => {
         return res.data;
       })
@@ -81,11 +81,8 @@ const BuyBook = () => {
   };
 
   useEffect(() => {
-    getAllBooks();
-    return () => {
-      setBooksData([]);
-    };
-  }, []);
+    if (userData.iduser) getAllBooks(userData.iduser);
+  }, [userData.iduser]);
 
   return (
     <div className="notesSearch_wrapper">

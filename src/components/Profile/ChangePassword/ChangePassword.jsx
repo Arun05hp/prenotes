@@ -1,5 +1,5 @@
+import { Button, Form, Input, message } from "antd";
 import React from "react";
-import { Button, Card, Form, Input, message } from "antd";
 import http from "../../../services/httpService";
 import "./changepassword.css";
 

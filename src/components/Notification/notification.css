@@ -37,14 +37,13 @@
 }
 
 .notifi_body .notifi .dec_wrapper .accept {
-  background-color: var(--border-color);
-  color: #fff;
+  color: var(--border-color);
+  background-color: transparent;
   font-weight: 500;
   margin-right: 16px;
 }
 
 .notifi_body .notifi .dec_wrapper .reject {
-  background-color: #d9d9d9;
-  color: var(--black);
+  color: rgba(255, 80, 67, 0.81);
   font-weight: 500;
 }

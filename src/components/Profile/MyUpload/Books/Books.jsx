@@ -1,8 +1,8 @@
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Avatar, Button, Card, Col, Image, Popconfirm, Row } from "antd";
 import React, { useContext, useEffect } from "react";
-import { Avatar, Button, Card, Col, Image, Tabs, Popconfirm, Row } from "antd";
 import { Context as AuthContext } from "../../../../context/AuthContext";
 import { Context as BookContext } from "../../../../context/BooksContext";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const Books = () => {
   let BASEURL = process.env.REACT_APP_BASE_URL;

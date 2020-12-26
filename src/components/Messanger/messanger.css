@@ -39,6 +39,13 @@
   background-color: #f3f3f3;
 }
 
+.msg_wrapper .userlist .userlist_body,
+.msg_wrapper .msg_box .chat_container {
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
 .msg_wrapper .msg_box {
   position: relative;
   padding-bottom: 50px;

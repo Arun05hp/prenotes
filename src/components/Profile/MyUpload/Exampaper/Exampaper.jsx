@@ -1,19 +1,8 @@
+import { FileTextOutlined, UploadOutlined } from "@ant-design/icons";
+import { Button, Card, Col, Form, message, Modal, Row, Upload } from "antd";
 import React, { useContext, useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  Row,
-  Form,
-  Input,
-  message,
-  Modal,
-  Select,
-  Upload,
-} from "antd";
 import { Context as AuthContext } from "../../../../context/AuthContext";
 import { Context as NotesContext } from "../../../../context/NotesContext";
-import { FileTextOutlined, UploadOutlined } from "@ant-design/icons";
 import http from "../../../../services/httpService";
 
 function getBranch(id) {

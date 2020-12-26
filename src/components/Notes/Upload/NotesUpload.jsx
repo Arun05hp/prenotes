@@ -1,14 +1,12 @@
-import React, { useState, useContext } from "react";
+import { FilePdfOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Select, Upload } from "antd";
+import React, { useContext, useState } from "react";
 import { Context as AuthContext } from "../../../context/AuthContext";
 import http from "../../../services/httpService";
-import { FilePdfOutlined } from "@ant-design/icons";
 import "./notesupload.css";
 const { Option } = Select;
 const { Dragger } = Upload;
 const NotesUpload = () => {
-  const BASEURL = process.env.REACT_APP_BASE_URL;
-  const actionUrl = BASEURL + "upload/uploadfile";
   const { state } = useContext(AuthContext);
   const { userData } = state;
   const [form] = Form.useForm();
