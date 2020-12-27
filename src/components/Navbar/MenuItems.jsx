@@ -98,17 +98,13 @@ const MenuItems = () => {
 
       <Menu.Item key="/notification">
         <NavLink to="/notification">
-          <Badge count={0} dot>
-            <BellOutlined />
-          </Badge>
+          <BellOutlined />
         </NavLink>
       </Menu.Item>
 
       <Menu.Item key="/messages">
         <NavLink to="/messages">
-          <Badge count={1} dot>
-            <MessageOutlined />
-          </Badge>
+          <MessageOutlined />
         </NavLink>
       </Menu.Item>
 

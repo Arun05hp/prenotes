@@ -39,9 +39,10 @@
   background-color: #f3f3f3;
 }
 
-.msg_wrapper .userlist .userlist_body {
+.msg_wrapper .userlist .userlist_body,
+.msg_wrapper .chat_container {
   min-height: 400px;
-  max-height: 600px;
+  max-height: 400px;
   overflow-y: scroll;
 }
 
@@ -80,9 +81,6 @@
 }
 
 .msg_wrapper .chat_container .messages {
-  min-height: 400px;
-  max-height: 600px;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -91,7 +89,8 @@
 }
 
 .msg_wrapper .chat_container .messages div {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: #fff;
+  border-radius: 5px 0 5px 5px;
   max-width: 60%;
   padding: 6px;
   margin-bottom: 8px;
@@ -99,6 +98,7 @@
 
 .msg_wrapper .chat_container .messages .from {
   align-self: end;
+  border-radius: 0 5px 5px 5px;
 }
 
 .msg_wrapper .chat_container .form {

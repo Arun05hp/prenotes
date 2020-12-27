@@ -5,15 +5,17 @@ import { SocketProvider } from "../../context/SocketProvider.js";
 import ChatContacts from "./ChatContacts.jsx";
 import ChatContainer from "./ChatContainer.jsx";
 import http from "../../services/httpService";
+import useSessionStorage from "../../helper/useSessionStorage";
 import "./messanger.css";
 
 const Messanger = () => {
   const { state } = useContext(AuthContext);
   const { userData } = state;
   const [id, setId] = useState(-1);
-  const [contactLists, setContactsList] = useState([]);
+  const [contactLists, setContactsList] = useSessionStorage("contacts", []);
   const [friendDetails, setFriendDetails] = useState({
     id: null,
+    userDetails: { name: null, profileImg: null },
     roomId: null,
   });
   console.log("friendDetails", friendDetails);
@@ -56,7 +58,11 @@ const Messanger = () => {
             />
           </Col>
           <Col md={18} xs={24}>
-            <ChatContainer id={id} friendDetails={friendDetails} />
+            {friendDetails.id ? (
+              <ChatContainer id={id} friendDetails={friendDetails} />
+            ) : (
+              "Select user"
+            )}
           </Col>
         </Row>
       </div>
