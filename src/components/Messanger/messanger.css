@@ -32,11 +32,21 @@
 }
 
 .msg_wrapper .userlist,
-.msg_wrapper .msg_box {
+.msg_wrapper .msg_box,
+.msg_wrapper .nomessages {
   height: 100%;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08), 1px 0px 2px rgba(0, 0, 0, 0.08);
   border-radius: 5px;
   background-color: #f3f3f3;
+}
+
+.msg_wrapper .userlist {
+  background-color: #fff;
+}
+
+.msg_wrapper .userlist ::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 .msg_wrapper .userlist .userlist_body,
@@ -142,4 +152,23 @@
   font-size: 18px;
   background-color: var(--border-color);
   color: var(--white);
+}
+
+.msg_wrapper .nomessages {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.msg_wrapper .nomessages .title {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.msg_wrapper .nomessages .subtitle {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(51, 51, 51, 0.65);
 }

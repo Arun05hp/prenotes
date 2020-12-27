@@ -61,7 +61,14 @@ const Messanger = () => {
             {friendDetails.id ? (
               <ChatContainer id={id} friendDetails={friendDetails} />
             ) : (
-              "Select user"
+              <div className="nomessages">
+                <div className="nomsg_body">
+                  <p className="title">No message yet.</p>
+                  <p className="subtitle">
+                    Once you connect, your messages will be displayed here.
+                  </p>
+                </div>
+              </div>
             )}
           </Col>
         </Row>
