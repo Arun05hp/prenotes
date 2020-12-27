@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Card, Col, Input } from "antd";
-
+import { useHistory } from "react-router-dom";
 import Slider from "./UserSlider";
 import TableImg from "../../assets/images/boytable.svg";
 import {
@@ -16,7 +16,16 @@ import Feedback from "./Feedback";
 
 const { Search } = Input;
 const Home = () => {
-  const onSearch = (value) => console.log(value);
+  let history = useHistory();
+  const onSearch = (value) => {
+    if (value) {
+      console.log(value);
+      history.push("/notes/search", {
+        string: value,
+        edit: true,
+      });
+    }
+  };
   return (
     <div className="home_wrapper">
       <section className="search_container">

@@ -1,9 +1,18 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Avatar, Button, Card, Col, Image, Popconfirm, Row } from "antd";
+import {
+  Avatar,
+  Button,
+  Card,
+  Col,
+  Image,
+  Popconfirm,
+  Row,
+  message,
+} from "antd";
 import React, { useContext, useEffect } from "react";
 import { Context as AuthContext } from "../../../../context/AuthContext";
 import { Context as BookContext } from "../../../../context/BooksContext";
-
+import http from "../../../../services/httpService";
 const Books = () => {
   let BASEURL = process.env.REACT_APP_BASE_URL;
   const {
@@ -14,9 +23,22 @@ const Books = () => {
     state: { booksData },
     getBooks,
   } = useContext(BookContext);
-  function confirm() {
-    console.log("Clicked on Yes.");
-  }
+
+  const deleteBook = (id) => {
+    http
+      .delete("upload/delbook/" + id)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        message.success("Deleted Successfully", 3);
+        getBooks(userData.iduser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     if (userData.iduser) getBooks(userData.iduser);
     else return;
@@ -47,7 +69,7 @@ const Books = () => {
                       <Col md={4} xs={24}>
                         <div className="btnWrapper">
                           <Button
-                            type="primary"
+                            type="link"
                             shape="circle"
                             icon={<EditOutlined />}
                           />
@@ -56,13 +78,13 @@ const Books = () => {
                             placement="topRight"
                             title="
                 Are you sure you want to delete?"
-                            onConfirm={confirm}
+                            onConfirm={() => deleteBook(item.idbook)}
                             okText="Yes"
                             cancelText="No"
                           >
                             <Button
                               danger
-                              type="primary"
+                              type="link"
                               shape="circle"
                               icon={<DeleteOutlined />}
                             />

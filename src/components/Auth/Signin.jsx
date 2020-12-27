@@ -24,7 +24,6 @@ const Signin = ({ handleCancel }) => {
         handleCancel();
         form.resetFields();
         console.log(res.userDetails.token);
-        message.success("Login Successful", 3);
         login(true, res.userDetails);
         getUserDetails(res.userDetails.id);
       })

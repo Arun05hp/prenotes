@@ -93,65 +93,127 @@ const Notification = () => {
   const getNotifiBox = (item) => {
     switch (item.status) {
       case 2:
-        return (
-          <div className="notifi">
-            <div className="title_wrapper">
-              <p className="text">
-                The owner of book "{item.title}" has declined your request.
-              </p>
-              <CloseOutlined onClick={() => handleClear(item.id)} />
+        if (item.for === 1)
+          return (
+            <div className="notifi">
+              <div className="title_wrapper">
+                <p className="text">
+                  The owner of book "{item.title}" has declined your request.
+                </p>
+                <CloseOutlined onClick={() => handleClear(item.id)} />
+              </div>
             </div>
-          </div>
-        );
+          );
+        else
+          return (
+            <div className="notifi">
+              <div className="title_wrapper">
+                <p className="text">
+                  Request declined "{item.title}" "{item.query}".
+                </p>
+                <CloseOutlined onClick={() => handleClear(item.id)} />
+              </div>
+            </div>
+          );
 
       case 1:
-        return (
-          <div className="notifi">
-            <div className="title_wrapper">
-              <p className="text">
-                The owner of book "{item.title}" has accepted your request.
-              </p>
-              <CloseOutlined />
+        if (item.for === 1)
+          return (
+            <div className="notifi">
+              <div className="title_wrapper">
+                <p className="text">
+                  The owner of book "{item.title}" has accepted your request.
+                </p>
+                <CloseOutlined />
+              </div>
+              <div className="dec_wrapper">
+                <Link to="/messages">
+                  <Button size="small" type="link" className="accept">
+                    Chat Now
+                  </Button>
+                </Link>
+              </div>
             </div>
-            <div className="dec_wrapper">
-              <Link to="/messages">
-                <Button size="small" type="link" className="accept">
-                  Chat Now
-                </Button>
-              </Link>
+          );
+        else
+          return (
+            <div className="notifi">
+              <div className="title_wrapper">
+                <p className="text">
+                  Request accepted "{item.title}" "{item.query}".
+                </p>
+                <CloseOutlined />
+              </div>
+              <div className="dec_wrapper">
+                <Link to="/messages">
+                  <Button size="small" type="link" className="accept">
+                    Chat Now
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </div>
-        );
+          );
+
       default:
-        return (
-          <div className="notifi">
-            <div className="title_wrapper">
-              <p className="text">
-                {item.senderName} is interested in buying your book "
-                {item.title}"
-              </p>
-              <CloseOutlined onClick={() => handleReject(item)} />
+        if (item.for === 1)
+          return (
+            <div className="notifi">
+              <div className="title_wrapper">
+                <p className="text">
+                  {item.senderName} is interested in buying your book "
+                  {item.title}"
+                </p>
+                <CloseOutlined onClick={() => handleReject(item)} />
+              </div>
+              <div className="dec_wrapper">
+                <Button
+                  size="small"
+                  type="link"
+                  className="accept"
+                  onClick={() => handleAccept(item)}
+                >
+                  Accept
+                </Button>
+                <Button
+                  size="small"
+                  type="link"
+                  onClick={() => handleReject(item)}
+                  className="reject"
+                >
+                  Decline
+                </Button>
+              </div>
             </div>
-            <div className="dec_wrapper">
-              <Button
-                size="small"
-                type="link"
-                className="accept"
-                onClick={() => handleAccept(item)}
-              >
-                Accept
-              </Button>
-              <Button
-                size="small"
-                type="link"
-                onClick={() => handleReject(item)}
-                className="reject"
-              >
-                Decline
-              </Button>
+          );
+        else
+          return (
+            <div className="notifi">
+              <div className="title_wrapper">
+                <p className="text">
+                  {item.senderName} has a doubt in "{item.title}-{item.query}"
+                </p>
+                <CloseOutlined onClick={() => handleReject(item)} />
+              </div>
+              <div className="dec_wrapper">
+                <Button
+                  size="small"
+                  type="link"
+                  className="accept"
+                  onClick={() => handleAccept(item)}
+                >
+                  Accept
+                </Button>
+                <Button
+                  size="small"
+                  type="link"
+                  onClick={() => handleReject(item)}
+                  className="reject"
+                >
+                  Decline
+                </Button>
+              </div>
             </div>
-          </div>
-        );
+          );
     }
   };
 

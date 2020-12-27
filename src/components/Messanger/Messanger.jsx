@@ -6,6 +6,7 @@ import ChatContacts from "./ChatContacts.jsx";
 import ChatContainer from "./ChatContainer.jsx";
 import http from "../../services/httpService";
 import useSessionStorage from "../../helper/useSessionStorage";
+import mailImg from "../../assets/images/mail.png";
 import "./messanger.css";
 
 const Messanger = () => {
@@ -50,7 +51,7 @@ const Messanger = () => {
   return (
     <SocketProvider id={id}>
       <div className="msg_wrapper">
-        <Row gutter={[16, 16]}>
+        <Row gutter={[4, 4]}>
           <Col md={6} xs={24}>
             <ChatContacts
               contactLists={contactLists}
@@ -63,6 +64,7 @@ const Messanger = () => {
             ) : (
               <div className="nomessages">
                 <div className="nomsg_body">
+                  <img className="mail" src={mailImg} alt="Mail Png" />
                   <p className="title">No message yet.</p>
                   <p className="subtitle">
                     Once you connect, your messages will be displayed here.

@@ -21,6 +21,8 @@
   justify-content: flex-start;
   padding: 16px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background-color: var(--white);
+  margin: 6px 0;
 }
 
 .msg_wrapper .userlist_body .user p {
@@ -40,20 +42,16 @@
   background-color: #f3f3f3;
 }
 
-.msg_wrapper .userlist {
-  background-color: #fff;
-}
-
-.msg_wrapper .userlist ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
-
 .msg_wrapper .userlist .userlist_body,
 .msg_wrapper .chat_container {
   min-height: 400px;
   max-height: 400px;
   overflow-y: scroll;
+}
+
+.msg_wrapper ::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 .msg_wrapper .msg_box {
@@ -159,6 +157,10 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.msg_wrapper .nomessages .mail {
+  max-width: 90px;
 }
 
 .msg_wrapper .nomessages .title {

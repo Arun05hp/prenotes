@@ -25,7 +25,7 @@ const Navigation = () => {
   useEffect(() => {
     getUser();
     message.config({
-      duration: 3,
+      duration: 2,
       maxCount: 1,
     });
   }, []);
@@ -42,6 +42,7 @@ const Navigation = () => {
           <Route path="/notification" component={Notification} />
           <Route path="/messages" component={Messanger} />
           <Route path="/notes/search" component={NotesSearch} />
+
           <Route path="/notes/upload" component={NotesUpload} />
 
           <Route path="/exampapers/search" component={ExamSearch} />

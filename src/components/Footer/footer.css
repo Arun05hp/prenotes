@@ -6,9 +6,8 @@ footer {
 }
 
 footer .footer {
-  background-image: url("../../assets/images/foot.svg");
-  background-repeat: no-repeat;
-  padding: 80px 0 20px 0;
+  background-color: var(--border-color);
+  padding: 20px 10px;
 }
 footer h4 {
   margin: 0;
@@ -18,12 +17,6 @@ footer h4 {
 }
 
 @media screen and (max-width: 768px) {
-  footer .footer {
-    background-image: url("../../assets/images/mobfoot.svg");
-    background-size: cover;
-    background-position: center;
-    padding: 40px 10px 20px 10px;
-  }
   footer h4 {
     font-size: 14px;
   }

@@ -16,17 +16,20 @@ const BuyBook = () => {
   const [booksData, setBooksData] = useState([]);
   const [form] = Form.useForm();
   const onFinish = (val) => {
+    let data = {
+      id: userData.iduser,
+      ...val,
+    };
     http
-      .get("upload/searchNotes", {
-        params: {
-          ...val,
-        },
-      })
+      .post("upload/searchBooks", data)
       .then((res) => {
         return res.data;
       })
       .then((res) => {
-        setBooksData(res.booksData);
+        let filterData = res.booksData.filter(
+          (item) => item.institute === userData.institute
+        );
+        setBooksData(filterData);
       })
       .catch((err) => {
         if (err.response.status === 400)
@@ -41,7 +44,10 @@ const BuyBook = () => {
         return res.data;
       })
       .then((res) => {
-        setBooksData(res.booksData);
+        let filterData = res.booksData.filter(
+          (item) => item.institute === userData.institute
+        );
+        setBooksData(filterData);
       })
       .catch((err) => {
         if (!err.response) return message.error("Network Error", 3);
@@ -98,7 +104,7 @@ const BuyBook = () => {
           >
             <Row gutter={16}>
               <Col md={20} sm={24} xs={24}>
-                <Form.Item name="topic">
+                <Form.Item name="text">
                   <Input
                     placeholder="Enter Title, Author"
                     autoComplete="off"

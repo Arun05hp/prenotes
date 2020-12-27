@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { Button, Card, Col, Popconfirm, Row } from "antd";
+import { Button, Card, Col, Popconfirm, Row, message } from "antd";
 import { Context as AuthContext } from "../../../../context/AuthContext";
 import { Context as NotesContext } from "../../../../context/NotesContext";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
+import http from "../../../../services/httpService";
 function getCategory(id) {
   switch (id) {
     case 1:
@@ -31,9 +31,20 @@ const Notes = () => {
     getNotes,
   } = useContext(NotesContext);
 
-  function confirm() {
-    console.log("Clicked on Yes.");
-  }
+  const deleteNotes = (id) => {
+    http
+      .delete("upload/delNotes/" + id)
+      .then((res) => {
+        return res.data;
+      })
+      .then((res) => {
+        message.success("Deleted Successfully", 3);
+        getNotes(userData.iduser);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     if (userData.iduser) getNotes(userData.iduser);
@@ -56,7 +67,7 @@ const Notes = () => {
                         <Col md={6} xs={6}>
                           <div className="btnWrapper">
                             <Button
-                              type="primary"
+                              type="link"
                               shape="circle"
                               icon={<EditOutlined />}
                             />
@@ -65,13 +76,13 @@ const Notes = () => {
                               placement="topRight"
                               title="
                         Are you sure you want to delete?"
-                              onConfirm={confirm}
+                              onConfirm={() => deleteNotes(item.idnotes)}
                               okText="Yes"
                               cancelText="No"
                             >
                               <Button
                                 danger
-                                type="primary"
+                                type="link"
                                 shape="circle"
                                 icon={<DeleteOutlined />}
                               />
@@ -86,42 +97,6 @@ const Notes = () => {
             })
           : ""}
       </Row>
-      {/* <Col md={12} xs={24}>
-            <div className="innerWrapper">
-              <Card className="itemWrapper">
-                <Row gutter={8}>
-                  <Col md={18} xs={18}>
-                    <h3>Material Science</h3>
-                    <p>Physics</p>
-                  </Col>
-                  <Col md={6} xs={6}>
-                    <div className="btnWrapper">
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        icon={<EditOutlined />}
-                      />
-                      <Popconfirm
-                        placement="topRight"
-                        title="
-                          Are you sure you want to delete?"
-                        onConfirm={confirm}
-                        okText="Yes"
-                        cancelText="No"
-                      >
-                        <Button
-                          danger
-                          type="primary"
-                          shape="circle"
-                          icon={<DeleteOutlined />}
-                        />
-                      </Popconfirm>
-                    </div>
-                  </Col>
-                </Row>
-              </Card>
-            </div>
-          </Col> */}
     </div>
   );
 };
