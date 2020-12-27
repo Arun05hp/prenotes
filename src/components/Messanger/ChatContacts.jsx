@@ -33,7 +33,7 @@ const ChatContacts = ({ contactLists, setFriendDetails }) => {
                 <p className="username">{item.userDetails.name}</p>
               </div>
             ))
-          : "No User"}
+          : ""}
       </div>
     </div>
   );

@@ -23,6 +23,7 @@ const ChatContainer = ({ id, friendDetails }) => {
         return res.data;
       })
       .then((res) => {
+        console.log(res.messages);
         setMessagesList(res.messages);
       })
       .catch((err) => {
@@ -45,7 +46,7 @@ const ChatContainer = ({ id, friendDetails }) => {
     };
 
     socket.emit("send-message", data);
-    setMessagesList({ sender: id, text: val.msg });
+    setMessagesList((prev) => [...prev, { sender: id, text: val.msg }]);
     form.resetFields();
   };
 
