@@ -65,6 +65,7 @@ const logout = (dispatch) => () => {
   console.log("logout");
   try {
     localStorage.clear();
+    sessionStorage.clear();
 
     dispatch({ type: "logout" });
   } catch (error) {
