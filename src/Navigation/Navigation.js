@@ -14,6 +14,8 @@ import NotesUpload from "../components/Notes/Upload/NotesUpload.jsx";
 import BuyBook from "../components/Books/Buy/BuyBook";
 import SellBook from "../components/Books/Sell/SellBook";
 import Notification from "../components/Notification/Notification";
+import Reg from "../components/Tuition/Reg/Reg";
+import View from "../components/Tuition/Find/View";
 const Navigation = () => {
   const { tryLocalSignin, getUserDetails } = useContext(AuthContext);
 
@@ -44,7 +46,8 @@ const Navigation = () => {
           <Route path="/notes/search" component={NotesSearch} />
 
           <Route path="/notes/upload" component={NotesUpload} />
-
+          <Route path="/tuitions/create" component={Reg} />
+          <Route path="/tuitions/search" component={View} />
           <Route path="/exampapers/search" component={ExamSearch} />
           <Route path="/exampapers/upload" component={ExamUpload} />
           <Route path="/books/buy" component={BuyBook} />

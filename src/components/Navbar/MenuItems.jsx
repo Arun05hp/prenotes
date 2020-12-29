@@ -122,7 +122,6 @@ const MenuItems = () => {
             >
               {userData.name ? userData.name.charAt(0) : ""}
             </Avatar>
-            <span className="uname">{userData.name}</span>
           </>
         }
       >

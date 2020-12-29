@@ -212,7 +212,7 @@ const Signup = () => {
                           rules={[
                             {
                               required: true,
-                              message: "Please input your username!",
+                              message: "Required!",
                             },
                             {
                               type: "email",

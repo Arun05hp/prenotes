@@ -1,0 +1,19 @@
+.tutor_wrapper {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px 10px;
+}
+
+.tutor_wrapper form {
+  padding: 20px 0;
+}
+
+.tutor_wrapper .btn_wrapper Button {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px 0;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 600;
+}
