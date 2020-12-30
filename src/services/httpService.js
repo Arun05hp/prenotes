@@ -1,26 +1,15 @@
 import axios from "axios";
-
+import SecureStorage from "../helper/SecureStorage";
 const BASE = process.env.REACT_APP_BASE_URL;
 
 axios.defaults.baseURL = BASE;
-// axios.defaults.headers.post["Content-Type"] = "application/json";
-// axios.interceptors.response.use(null, (error) => {
-//   const expectedError =
-//     error.response &&
-//     error.response.status >= 400 &&
-//     error.response.status < 500;
-//   if (!expectedError) {
-//     logger.log(error);
-//     toast.error("An unexpected error occurred");
-//   }
-//   return Promise.reject(error);
-// });
+
 axios.interceptors.request.use(
   async (config) => {
-    const token = await sessionStorage.getItem("preNotest");
+    const data = await SecureStorage.getItem("userData");
 
-    if (token) {
-      config.headers.Authorization = `Pre@Notes20 ${token}`;
+    if (data) {
+      config.headers.Authorization = `PreNotes__20 ${data.token}`;
     }
     return config;
   },

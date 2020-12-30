@@ -10,12 +10,12 @@ nav {
 }
 
 .navbar .logo {
-  font-size: 32px;
-  font-weight: 800;
+  max-height: 32px;
 }
-.navbar .logo a {
-  color: var(--primary-color);
+.navbar .logo .logoimg {
+  max-width: 200px;
 }
+
 .navbar .nav_wrapper {
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@ nav {
 }
 .navbar .rightMenu ul.ant-menu-horizontal li {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   text-transform: uppercase;
   border-bottom: none !important;
   border-bottom-style: none !important;
@@ -46,13 +46,43 @@ nav {
 }
 
 .navbar .rightMenu ul li span {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 600;
+  margin: 0;
 }
 
 .navbar .rightMenu ul li .ant-badge .anticon {
   margin: 0;
   font-size: 16px;
+}
+.navbar .mob_wrapper {
+  display: none;
+  visibility: hidden;
+}
+
+.navbar .mob_wrapper .mob_container {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .mob_wrapper .mob_container ul {
+  border-bottom: 0;
+}
+
+.navbar .mob_wrapper .mob_container ul.ant-menu-horizontal li {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-bottom: none !important;
+  border-bottom-style: none !important;
+  margin: 0;
+  padding: 0 10px;
+}
+
+.navbar .mob_container ul li span {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
 }
 
 .navbar .hamburger {
@@ -60,13 +90,15 @@ nav {
   margin: 12px;
   display: none;
   background: none;
+  border: none;
+  box-shadow: none;
 }
 
 .navbar .hamburger .barsBtn {
   display: block;
   width: 20px;
   height: 2px;
-  background: #1890ff;
+  background: #536fc6;
   position: relative;
 }
 .navbar .signupBtn {
@@ -96,7 +128,7 @@ nav {
   top: -6px;
   left: 0;
   height: 2px;
-  background: #1890ff;
+  background: #536fc6;
 }
 
 .navbar .hamburger .barsBtn:after {
@@ -121,11 +153,43 @@ nav {
 .sidenav .uname {
   padding-left: 10px;
 }
-
+.sidenav {
+  display: none;
+}
 .sidenav .ant-drawer-body {
   padding: 24px 0;
 }
-/*
+.sidenav .drawerlogoimg {
+  max-width: 120px;
+}
+
+.sidenav ul li {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sidenav ul li {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sidenav .signupBtn {
+  margin-left: 24px;
+  background-color: var(--border-color);
+  border-radius: 5px;
+  color: var(--white);
+}
+
+.sidenav .signupBtn:hover {
+  background-color: var(--border-color);
+  color: var(--white);
+}
+.sidenav .ant-menu-sub.ant-menu-inline {
+  background-color: #fcfcfc;
+}
+
+/*  
+
 .sidenav
   .ant-drawer-body
   .ant-menu-horizontal:not(.ant-menu-dark)
@@ -151,8 +215,17 @@ nav {
 .sign_modal .ant-modal-content {
   border-radius: 10px;
 }
+@media screen and (max-width: 568px) {
+}
 
 @media (max-width: 767px) {
+  .sidenav {
+    display: block;
+  }
+  .navbar .mob_wrapper {
+    display: block;
+    visibility: visible;
+  }
   .navbar .hamburger {
     display: inline-block;
   }
@@ -160,17 +233,16 @@ nav {
   .rightMenu {
     display: none;
   }
-
-  .logo a {
-    margin-left: -20px;
+  .navbar .logo {
+    max-height: 28px;
+    margin-left: 10px;
+  }
+  .navbar .logo .logoimg {
+    max-width: 150px;
   }
 
   .navbar .ant-menu-item,
   .navbar .ant-menu-submenu-title {
     padding: 1px 20px;
-  }
-
-  .logo a {
-    padding: 10px 20px;
   }
 }

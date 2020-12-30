@@ -1,6 +1,5 @@
 .booksSearch_body {
   padding: 24px 15px;
-  background-color: #fafafa;
 }
 .booksSearch_body .itemWrapper {
   border-radius: 8px;
@@ -27,7 +26,7 @@
 
 .booksSearch_body .itemWrapper .book_wrapper {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 15px;
   padding: 12px;
@@ -73,4 +72,7 @@
   font-size: 14px;
   padding: 14px 0;
   border-radius: 0 0 8px 8px;
+}
+.booksSearch_body .itemWrapper .btn-wrapper .ant-skeleton-element {
+  width: 100%;
 }

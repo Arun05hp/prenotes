@@ -16,15 +16,17 @@ const authReducer = (state, action) => {
 
 const tryLocalSignin = (dispatch) => async () => {
   try {
-    const flag = JSON.parse(SecureStorage.getItem("loginFlag"));
-    const data = JSON.parse(SecureStorage.getItem("userData"));
-    console.log(flag, data);
-    if (flag && data.token) {
-      dispatch({
-        type: "login",
-        payload: true,
-      });
-      return data.id;
+    const flag = SecureStorage.getItem("loginFlag");
+    const data = SecureStorage.getItem("userData");
+
+    if (flag && data) {
+      if (data.token) {
+        dispatch({
+          type: "login",
+          payload: true,
+        });
+        return data.id;
+      }
     }
     return false;
   } catch (error) {
@@ -33,6 +35,7 @@ const tryLocalSignin = (dispatch) => async () => {
 };
 
 const login = (dispatch) => (flag, user) => {
+  console.log(user);
   try {
     SecureStorage.setItem("userData", JSON.stringify(user));
     SecureStorage.setItem("loginFlag", JSON.stringify(flag));
@@ -50,7 +53,6 @@ const getUserDetails = (dispatch) => (userId) => {
         return res.data;
       })
       .then((res) => {
-        console.log(res);
         dispatch({ type: "setUser", payload: res.userDetails });
       })
       .catch((err) => {

@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Button,
@@ -8,6 +8,7 @@ import {
   Popconfirm,
   Row,
   message,
+  Skeleton,
 } from "antd";
 import React, { useContext, useEffect } from "react";
 import { Context as AuthContext } from "../../../../context/AuthContext";
@@ -20,7 +21,7 @@ const Books = () => {
   } = useContext(AuthContext);
 
   const {
-    state: { booksData },
+    state: { booksData, isLoading },
     getBooks,
   } = useContext(BookContext);
 
@@ -47,56 +48,69 @@ const Books = () => {
   return (
     <div>
       <Row gutter={[16, 16]}>
-        {booksData.length > 0
-          ? booksData.map((item) => {
-              return (
-                <Col md={12} xs={24}>
-                  <Card className="itemWrapper">
-                    <Row gutter={8}>
-                      <Col md={6} xs={6}>
-                        <Avatar
-                          shape="square"
-                          src={<Image src={BASEURL + item.fileLink} />}
-                        />
-                      </Col>
-                      <Col md={14} xs={18}>
-                        <h3>{item.bookName}</h3>
-                        <p>
-                          {item.authorName} by {item.publisherName}
-                        </p>
-                        <h3>Rs {item.price}</h3>
-                      </Col>
-                      <Col md={4} xs={24}>
-                        <div className="btnWrapper">
+        {isLoading ? (
+          <Col md={12} xs={24}>
+            <Card className="itemWrapper">
+              <Row gutter={8}>
+                <Col md={6} xs={6}>
+                  <Skeleton.Image active />
+                </Col>
+                <Col md={18} xs={18}>
+                  <div style={{ padding: "0 10px" }}>
+                    <Skeleton active paragraph={true} />
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
+        ) : booksData.length > 0 ? (
+          booksData.map((item) => {
+            return (
+              <Col md={12} xs={24}>
+                <Card className="itemWrapper">
+                  <Row gutter={8}>
+                    <Col md={6} xs={6}>
+                      <Avatar
+                        shape="square"
+                        src={<Image src={BASEURL + item.fileLink} />}
+                      />
+                    </Col>
+                    <Col md={14} xs={18}>
+                      <h3>{item.bookName}</h3>
+                      <p>
+                        {item.authorName} by {item.publisherName}
+                      </p>
+                      <h3>Rs {item.price}</h3>
+                    </Col>
+                    <Col md={4} xs={24}>
+                      <div className="btnWrapper">
+                        <Popconfirm
+                          placement="topRight"
+                          title="
+                Are you sure you want to delete?"
+                          onConfirm={() => deleteBook(item.idbook)}
+                          okText="Yes"
+                          cancelText="No"
+                        >
                           <Button
+                            danger
                             type="link"
                             shape="circle"
-                            icon={<EditOutlined />}
+                            icon={<DeleteOutlined />}
                           />
-
-                          <Popconfirm
-                            placement="topRight"
-                            title="
-                Are you sure you want to delete?"
-                            onConfirm={() => deleteBook(item.idbook)}
-                            okText="Yes"
-                            cancelText="No"
-                          >
-                            <Button
-                              danger
-                              type="link"
-                              shape="circle"
-                              icon={<DeleteOutlined />}
-                            />
-                          </Popconfirm>
-                        </div>
-                      </Col>
-                    </Row>
-                  </Card>
-                </Col>
-              );
-            })
-          : ""}
+                        </Popconfirm>
+                      </div>
+                    </Col>
+                  </Row>
+                </Card>
+              </Col>
+            );
+          })
+        ) : (
+          <Col md={12} sm={12}>
+            <Card>No Records</Card>
+          </Col>
+        )}
       </Row>
     </div>
   );

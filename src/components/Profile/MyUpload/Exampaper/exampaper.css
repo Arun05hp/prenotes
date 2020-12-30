@@ -1,0 +1,23 @@
+.exam .btn_wrapper {
+  margin-top: 10px;
+}
+
+.exam Button {
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px 0;
+  height: auto;
+  background-color: var(--border-color);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.exam Button:hover {
+  background-color: var(--border-color);
+  color: var(--white);
+}
+
+.exam Button:focus {
+  background-color: var(--border-color);
+  color: var(--white);
+}

@@ -14,29 +14,33 @@ const Messanger = () => {
   const { userData } = state;
   const [id, setId] = useState(-1);
   const [contactLists, setContactsList] = useSessionStorage("contacts", []);
+  const [conLoading, setConLoading] = useState(false);
   const [friendDetails, setFriendDetails] = useState({
     id: null,
     userDetails: { name: null, profileImg: null },
     roomId: null,
   });
-  console.log("friendDetails", friendDetails);
+
   const fetchContacts = (id) => {
+    setConLoading(true);
     http
       .get("contacts/contacts/" + id)
       .then((res) => {
         return res.data;
       })
       .then((res) => {
-        console.log(res.contactsData);
         if (res.contactsData.length > 0) {
-          console.log(res.contactsData[0].uuid);
           setId(res.contactsData[0].uuid);
           if (res.contactsData[0].contacts) {
             setContactsList(res.contactsData[0].contacts);
           }
         }
+        setTimeout(() => {
+          setConLoading(false);
+        }, 3000);
       })
       .catch((err) => {
+        setConLoading(false);
         if (!err.response) return message.error("Network Error", 3);
         if (err.response.status && err.response.status === 400)
           message.error(err.response.data.message, 3);
@@ -51,11 +55,12 @@ const Messanger = () => {
   return (
     <SocketProvider id={id}>
       <div className="msg_wrapper">
-        <Row gutter={[4, 4]}>
+        <Row gutter={[16, 16]}>
           <Col md={6} xs={24}>
             <ChatContacts
               contactLists={contactLists}
               setFriendDetails={setFriendDetails}
+              conLoading={conLoading}
             />
           </Col>
           <Col md={18} xs={24}>

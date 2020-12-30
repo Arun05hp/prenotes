@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { Button, Card, Col, Popconfirm, Row, message } from "antd";
+import { Button, Card, Col, Popconfirm, Row, message, Skeleton } from "antd";
 import { Context as AuthContext } from "../../../../context/AuthContext";
 import { Context as NotesContext } from "../../../../context/NotesContext";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import http from "../../../../services/httpService";
 function getCategory(id) {
   switch (id) {
@@ -27,7 +27,7 @@ const Notes = () => {
     state: { userData },
   } = useContext(AuthContext);
   const {
-    state: { notesData },
+    state: { notesData, isLoading },
     getNotes,
   } = useContext(NotesContext);
 
@@ -53,49 +53,60 @@ const Notes = () => {
   return (
     <div>
       <Row gutter={[16, 16]}>
-        {notesData.length > 0
-          ? notesData.map((item) => {
-              return (
-                <Col key={item.idnotes} md={12} xs={24}>
-                  <div className="innerWrapper">
-                    <Card className="itemWrapper">
-                      <Row gutter={8}>
-                        <Col md={18} xs={18}>
-                          <h3>{item.topic}</h3>
-                          <p>{getCategory(item.category)}</p>
-                        </Col>
-                        <Col md={6} xs={6}>
-                          <div className="btnWrapper">
+        {isLoading ? (
+          <>
+            <Col md={12} xs={24}>
+              <Card className="itemWrapper">
+                <Skeleton active rows={1} paragraph={false} />
+              </Card>
+            </Col>
+            <Col md={12} xs={24}>
+              <Card className="itemWrapper">
+                <Skeleton active rows={1} paragraph={false} />
+              </Card>
+            </Col>
+          </>
+        ) : notesData.length > 0 ? (
+          notesData.map((item) => {
+            return (
+              <Col key={item.idnotes} md={12} xs={24}>
+                <div className="innerWrapper">
+                  <Card className="itemWrapper">
+                    <Row gutter={8}>
+                      <Col md={18} xs={18}>
+                        <h3>{item.topic}</h3>
+                        <p>{getCategory(item.category)}</p>
+                      </Col>
+                      <Col md={6} xs={6}>
+                        <div className="btnWrapper">
+                          <Popconfirm
+                            placement="topRight"
+                            title="
+                        Are you sure you want to delete?"
+                            onConfirm={() => deleteNotes(item.idnotes)}
+                            okText="Yes"
+                            cancelText="No"
+                          >
                             <Button
+                              danger
                               type="link"
                               shape="circle"
-                              icon={<EditOutlined />}
+                              icon={<DeleteOutlined />}
                             />
-
-                            <Popconfirm
-                              placement="topRight"
-                              title="
-                        Are you sure you want to delete?"
-                              onConfirm={() => deleteNotes(item.idnotes)}
-                              okText="Yes"
-                              cancelText="No"
-                            >
-                              <Button
-                                danger
-                                type="link"
-                                shape="circle"
-                                icon={<DeleteOutlined />}
-                              />
-                            </Popconfirm>
-                          </div>
-                        </Col>
-                      </Row>
-                    </Card>
-                  </div>
-                </Col>
-              );
-            })
-          : ""}
+                          </Popconfirm>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Card>
+                </div>
+              </Col>
+            );
+          })
+        ) : (
+          <Col md={12} xs={24}>
+            <Card>No Records</Card>
+          </Col>
+        )}
       </Row>
     </div>
   );

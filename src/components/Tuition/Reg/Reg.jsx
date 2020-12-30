@@ -1,15 +1,15 @@
 import {
   Button,
-  Form,
   Col,
+  Form,
   Input,
-  message,
   InputNumber,
-  TimePicker,
+  message,
   Row,
   Select,
+  TimePicker,
 } from "antd";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Context as AuthContext } from "../../../context/AuthContext";
 import http from "../../../services/httpService";
 import "./reg.css";

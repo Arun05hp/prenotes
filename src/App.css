@@ -33,6 +33,7 @@ img {
   display: block;
   position: relative;
   padding-bottom: 70px;
+  background-color: #fdfdff;
 }
 
 .ant-form .ant-form-item-label > label {

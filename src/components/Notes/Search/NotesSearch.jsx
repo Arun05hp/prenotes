@@ -9,7 +9,9 @@ import {
   message,
   Modal,
   Select,
+  Skeleton,
   Tooltip,
+  Result,
 } from "antd";
 import bg from "../../../assets/bg/books.png";
 import { Context as AuthContext } from "../../../context/AuthContext";
@@ -50,9 +52,11 @@ const NotesSearch = (props) => {
   const [notesData, setNotesData] = useState([]);
   const [visibleModal, setVisibleModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [form] = Form.useForm();
   const [queryForm] = Form.useForm();
   const onFinish = (val) => {
+    setIsLoading(true);
     http
       .get("upload/searchNotes", {
         params: {
@@ -64,14 +68,19 @@ const NotesSearch = (props) => {
       })
       .then((res) => {
         setNotesData(res.notesData);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       })
       .catch((err) => {
+        setIsLoading(false);
         if (err.response.status === 400)
           message.error(err.response.data.message, 3);
       });
   };
 
   const getAllNotes = () => {
+    setIsLoading(true);
     http
       .get("upload/allNotes")
       .then((res) => {
@@ -79,10 +88,12 @@ const NotesSearch = (props) => {
       })
       .then((res) => {
         setNotesData(res.notesData);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       })
       .catch((err) => {
-        if (err.response.status === 400)
-          message.error(err.response.data.message, 3);
+        setIsLoading(false);
       });
   };
 
@@ -119,8 +130,6 @@ const NotesSearch = (props) => {
       })
       .catch((err) => {
         if (!err.response) return message.error("Network Error", 3);
-        if (err.response.status && err.response.status === 400)
-          message.error(err.response.data.message, 3);
       });
   };
 
@@ -146,6 +155,12 @@ const NotesSearch = (props) => {
       <header>
         <img src={bg} alt="image" />
         <div className="input_wrapper">
+          <div className="title">
+            <h3 className="titletext">Search.Study.Share</h3>
+            <p className="subtitle">
+              Find study related materials inside campus.
+            </p>
+          </div>
           <Form
             form={form}
             layout="vertical"
@@ -153,7 +168,7 @@ const NotesSearch = (props) => {
             name="basic"
             onFinish={onFinish}
           >
-            <Row gutter={16}>
+            <Row gutter={[16, 16]}>
               <Col md={13} sm={24} xs={24}>
                 <Form.Item name="topic">
                   <Input
@@ -163,7 +178,7 @@ const NotesSearch = (props) => {
                   />
                 </Form.Item>
               </Col>
-              <Col md={7} sm={12} xs={12}>
+              <Col md={8} sm={12} xs={12}>
                 <Form.Item name="category">
                   <Select placeholder="Category" size="large">
                     <Option value={0}>All</Option>
@@ -175,7 +190,7 @@ const NotesSearch = (props) => {
                   </Select>
                 </Form.Item>
               </Col>
-              <Col md={4} sm={12} xs={12}>
+              <Col md={3} sm={12} xs={12}>
                 <Form.Item>
                   <div className="btn_wrapper">
                     <Button htmlType="submit" size="large">
@@ -190,59 +205,98 @@ const NotesSearch = (props) => {
       </header>
       <main className="notesSearch_body">
         <Row gutter={[16, 32]}>
-          {notesData.length > 0
-            ? notesData.map((item) => {
-                return (
-                  <Col key={item.idnotes} md={6} xs={12}>
-                    <div className="innerWrapper">
-                      <a href={BASEURL + item.fileLink} target="_blank">
-                        <Card className="itemWrapper">
-                          <h3>{item.topic}</h3>
-                          <p>{getCategory(item.category)}</p>
-                        </Card>
-                      </a>
-                      <div className="btn_wrapper">
-                        <MessageOutlined
-                          onClick={() => {
-                            setSelectedFile(item);
-                            setVisibleModal(true);
-                          }}
-                        />
-                        <Tooltip
-                          className="share"
-                          trigger={["click"]}
-                          color={"#fff"}
-                          title={
-                            <>
-                              <a
-                                href={`https://web.whatsapp.com/send?text=${
-                                  BASEURL + item.fileLink
-                                }`}
-                                data-action="share/whatsapp/share"
-                                target="_blank"
-                              >
-                                <WhatsAppOutlined className="shareBtn whatsappBtn" />{" "}
-                              </a>
-                              <a
-                                href={`https://www.facebook.com/sharer/sharer.php?u=${
-                                  BASEURL + item.fileLink
-                                }`}
-                                target="_blank"
-                              >
-                                <FacebookOutlined className="shareBtn fb" />
-                              </a>
-                            </>
-                          }
-                          icon={null}
-                        >
-                          <ShareAltOutlined />
-                        </Tooltip>
-                      </div>
+          {isLoading ? (
+            <>
+              <Col md={6} xs={12}>
+                <div className="innerWrapper">
+                  <Card className="itemWrapper">
+                    <Skeleton active />
+                  </Card>
+                </div>
+              </Col>
+              <Col md={6} xs={12}>
+                <div className="innerWrapper">
+                  <Card className="itemWrapper">
+                    <Skeleton active />
+                  </Card>
+                </div>
+              </Col>
+              <Col md={6} xs={12}>
+                <div className="innerWrapper">
+                  <Card className="itemWrapper">
+                    <Skeleton active />
+                  </Card>
+                </div>
+              </Col>
+            </>
+          ) : notesData.length > 0 ? (
+            notesData.map((item) => {
+              let id = item.iduser;
+              return (
+                <Col key={item.idnotes} md={6} xs={12}>
+                  <div className="innerWrapper">
+                    <a href={BASEURL + item.fileLink} target="_blank">
+                      <Card className="itemWrapper">
+                        <h3>{item.topic}</h3>
+                        <p>{getCategory(item.category)}</p>
+                      </Card>
+                    </a>
+                    <div className="btn_wrapper">
+                      {userData
+                        ? userData.iduser &&
+                          userData.iduser != id && (
+                            <MessageOutlined
+                              onClick={() => {
+                                setSelectedFile(item);
+                                setVisibleModal(true);
+                              }}
+                            />
+                          )
+                        : null}
+                      <Tooltip
+                        className="share"
+                        trigger={["click"]}
+                        color={"#fff"}
+                        title={
+                          <>
+                            <a
+                              href={`https://web.whatsapp.com/send?text=${
+                                BASEURL + item.fileLink
+                              }`}
+                              data-action="share/whatsapp/share"
+                              target="_blank"
+                            >
+                              <WhatsAppOutlined className="shareBtn whatsappBtn" />{" "}
+                            </a>
+                            <a
+                              href={`https://www.facebook.com/sharer/sharer.php?u=${
+                                BASEURL + item.fileLink
+                              }`}
+                              target="_blank"
+                            >
+                              <FacebookOutlined className="shareBtn fb" />
+                            </a>
+                          </>
+                        }
+                        icon={null}
+                      >
+                        <ShareAltOutlined />
+                      </Tooltip>
                     </div>
-                  </Col>
-                );
-              })
-            : ""}
+                  </div>
+                </Col>
+              );
+            })
+          ) : (
+            <Col md={24} xs={24}>
+              <Result
+                status="404"
+                title="No Results Found"
+                subTitle={null}
+                // extra={<Button type="primary">Back Home</Button>}
+              />
+            </Col>
+          )}
         </Row>
       </main>
       <Modal

@@ -6,10 +6,12 @@ import {
   UploadOutlined,
   UserOutlined,
   KeyOutlined,
+  FundProjectionScreenOutlined,
 } from "@ant-design/icons";
 import "./profile.css";
 import PersonalInfo from "./PersonalInfo";
 import MyUpload from "./MyUpload/MyUpload";
+import Tutor from "./Tutor/Tutor";
 import ChangePassword from "./ChangePassword/ChangePassword";
 
 const Profile = () => {
@@ -36,6 +38,16 @@ const Profile = () => {
                   <span className="mobNavTitle">My uploads</span>
                 </NavLink>
               </Menu.Item>
+
+              <Menu.Item
+                key="/myprofile/tutor"
+                icon={<FundProjectionScreenOutlined />}
+              >
+                <NavLink to="/myprofile/tutor">
+                  <span className="mobNavTitle">Tutor</span>
+                </NavLink>
+              </Menu.Item>
+
               <Menu.Item key="/myprofile/changepassword" icon={<KeyOutlined />}>
                 <NavLink to="/myprofile/changepassword">
                   <span className="mobNavTitle">Change Password</span>
@@ -59,6 +71,12 @@ const Profile = () => {
               <Menu.Item key="/myprofile/myuploads" icon={<UploadOutlined />}>
                 <NavLink to="/myprofile/myuploads">My uploads</NavLink>
               </Menu.Item>
+              <Menu.Item
+                key="/myprofile/tutor"
+                icon={<FundProjectionScreenOutlined />}
+              >
+                <NavLink to="/myprofile/tutor">Tutor</NavLink>
+              </Menu.Item>
               <Menu.Item key="/myprofile/changepassword" icon={<KeyOutlined />}>
                 <NavLink to="/myprofile/changepassword">
                   Change Password
@@ -72,6 +90,7 @@ const Profile = () => {
             <Switch>
               <Route path="/myprofile/personalInfo" component={PersonalInfo} />
               <Route path="/myprofile/myuploads" component={MyUpload} />
+              <Route path="/myprofile/tutor" component={Tutor} />
               <Route
                 path="/myprofile/changepassword"
                 component={ChangePassword}

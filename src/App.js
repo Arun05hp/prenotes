@@ -6,6 +6,7 @@ import { Provider as BooksProvider } from "./context/BooksContext";
 import Navigation from "./Navigation/Navigation";
 import Signup from "./components/Auth/Signup";
 import "./App.css";
+import NotFound from "./components/Errors/NotFound";
 
 const App = () => {
   return (
@@ -15,8 +16,9 @@ const App = () => {
           <div className="app">
             <Router>
               <Switch>
-                <Route path="/signup" exact component={Signup} />
+                <Route exact path="/signup" exact component={Signup} />
                 <Navigation />
+                <Route component={NotFound} />
               </Switch>
             </Router>
           </div>

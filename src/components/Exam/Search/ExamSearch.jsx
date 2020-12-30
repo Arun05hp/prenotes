@@ -140,6 +140,12 @@ const ExamSearch = () => {
       <header>
         <img src={bg} alt="image" />
         <div className="input_wrapper">
+          <div className="title">
+            <h3 className="titletext">Search.Study.Share</h3>
+            <p className="subtitle">
+              Step up your preperation with previous question papers.
+            </p>
+          </div>
           <Form
             form={form}
             layout="vertical"
@@ -147,7 +153,7 @@ const ExamSearch = () => {
             name="basic"
             onFinish={onFinish}
           >
-            <Row gutter={16}>
+            <Row gutter={[16, 16]}>
               <Col md={13} sm={24} xs={24}>
                 <Form.Item name="string">
                   <Input

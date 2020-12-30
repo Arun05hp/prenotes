@@ -1,10 +1,20 @@
-import { FileTextOutlined, UploadOutlined } from "@ant-design/icons";
-import { Button, Card, Col, Form, message, Modal, Row, Upload } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Card,
+  Col,
+  Form,
+  message,
+  Modal,
+  Row,
+  Upload,
+  Skeleton,
+} from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { Context as AuthContext } from "../../../../context/AuthContext";
 import { Context as NotesContext } from "../../../../context/NotesContext";
 import http from "../../../../services/httpService";
-
+import "./exampaper.css";
 function getBranch(id) {
   switch (id) {
     case 1:
@@ -34,7 +44,7 @@ const Exampaper = () => {
   } = useContext(AuthContext);
 
   const {
-    state: { examData },
+    state: { examData, isLoading },
     getExampaper,
   } = useContext(NotesContext);
 
@@ -98,56 +108,60 @@ const Exampaper = () => {
   return (
     <div>
       <Row gutter={[16, 16]}>
-        {examData.length > 0
-          ? examData.map((item) => {
-              return (
-                <Col key={item.idnotes} md={12} xs={24}>
-                  <div className="innerWrapper">
-                    <Card className="itemWrapper">
-                      <Row gutter={8}>
-                        <Col md={6} xs={6}>
-                          <div className="file-icon">
-                            <FileTextOutlined />
-                          </div>
-                        </Col>
-                        <Col md={18} xs={18}>
-                          <h3>{item.subject}</h3>
-                          <p>{getBranch(item.branch)}</p>
-                        </Col>
-                        <Col md={12} sm={12} xs={24}>
-                          <div className="btn_wrapper">
+        {isLoading ? (
+          <Col md={12} xs={24}>
+            <div className="innerWrapper">
+              <Card className="itemWrapper">
+                <Skeleton active />
+              </Card>
+            </div>
+          </Col>
+        ) : examData.length > 0 ? (
+          examData.map((item) => {
+            return (
+              <Col key={item.idnotes} md={12} xs={24}>
+                <div className="innerWrapper exam">
+                  <Card className="itemWrapper">
+                    <Row gutter={8}>
+                      <Col md={24} xs={24}>
+                        <h3>{item.subject}</h3>
+                        <p>{getBranch(item.branch)}</p>
+                      </Col>
+                      <Col md={12} sm={12} xs={24}>
+                        <div className="btn_wrapper">
+                          <a href={BASEURL + item.quefileLink} target="_blank">
+                            <Button> View Exam Paper</Button>
+                          </a>
+                        </div>
+                      </Col>
+                      <Col md={12} sm={12} xs={24}>
+                        <div className="btn_wrapper">
+                          {item.solfileLink != null &&
+                          item.solfileLink != "" ? (
                             <a
-                              href={BASEURL + item.quefileLink}
+                              href={BASEURL + item.solfileLink}
                               target="_blank"
                             >
-                              <Button> View Exam Paper</Button>
+                              <Button> View Soultion</Button>
                             </a>
-                          </div>
-                        </Col>
-                        <Col md={12} sm={12} xs={24}>
-                          <div className="btn_wrapper">
-                            {item.solfileLink != null &&
-                            item.solfileLink != "" ? (
-                              <a
-                                href={BASEURL + item.solfileLink}
-                                target="_blank"
-                              >
-                                <Button> View Soultion</Button>
-                              </a>
-                            ) : (
-                              <Button onClick={() => handleUpload(item.idexam)}>
-                                Upload Soultion
-                              </Button>
-                            )}
-                          </div>
-                        </Col>
-                      </Row>
-                    </Card>
-                  </div>
-                </Col>
-              );
-            })
-          : ""}
+                          ) : (
+                            <Button onClick={() => handleUpload(item.idexam)}>
+                              Upload Soultion
+                            </Button>
+                          )}
+                        </div>
+                      </Col>
+                    </Row>
+                  </Card>
+                </div>
+              </Col>
+            );
+          })
+        ) : (
+          <Col md={12} xs={24}>
+            <Card>No Records</Card>
+          </Col>
+        )}
       </Row>
       <Modal
         visible={visibleModal}

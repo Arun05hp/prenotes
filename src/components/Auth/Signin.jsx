@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Form, Input, message } from "antd";
 import { Context as AuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -12,9 +12,11 @@ const layout = {
 
 const Signin = ({ handleCancel }) => {
   const { login, getUserDetails } = useContext(AuthContext);
+  const [isLoading, setIsloading] = useState(false);
 
   const [form] = Form.useForm();
   const onFinish = (values) => {
+    setIsloading(true);
     http
       .post("user/signin", values)
       .then((res) => {
@@ -26,8 +28,10 @@ const Signin = ({ handleCancel }) => {
         console.log(res.userDetails.token);
         login(true, res.userDetails);
         getUserDetails(res.userDetails.id);
+        setIsloading(false);
       })
       .catch((err) => {
+        setIsloading(false);
         if (!err.response) return message.error("Network Error", 3);
 
         if (err.response.status && err.response.status === 400)
@@ -67,7 +71,9 @@ const Signin = ({ handleCancel }) => {
         </Form.Item>
 
         <div className="btn">
-          <Button htmlType="submit">SIGN IN</Button>
+          <Button htmlType="submit" loading={isLoading}>
+            Sign In
+          </Button>
         </div>
       </Form>
     </div>

@@ -24,3 +24,21 @@
   color: var(--white);
   font-weight: 600;
 }
+
+.signin Button:hover {
+  background-color: var(--border-color);
+  color: var(--white);
+}
+
+@media screen and (max-width: 568px) {
+  .signin {
+    padding: 20px 15px;
+  }
+  .signin h2 {
+    font-size: 18px;
+  }
+
+  .signin p {
+    font-size: 11px;
+  }
+}

@@ -82,7 +82,7 @@ const Home = () => {
                 <div className="icon_wrapper">
                   <BookOutlined />
                 </div>
-                <h2 className="subTitle">Buy/sell or rent books</h2>
+                <h2 className="subTitle">Buy/Sell Books</h2>
                 <div className="info">
                   Students can buy, sell or even give books on rent for free or
                   at an affordable price.
@@ -94,7 +94,7 @@ const Home = () => {
                 <div className="icon_wrapper">
                   <EnvironmentOutlined />
                 </div>
-                <h2 className="subTitle">Tuitions inside campus</h2>
+                <h2 className="subTitle">Tuitions Inside Campus</h2>
                 <div className="info">
                   Look for the tuitions detail going inside the campus related
                   to your subjects of interest.

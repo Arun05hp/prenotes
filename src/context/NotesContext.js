@@ -6,52 +6,48 @@ const notesReducer = (state, action) => {
       return { ...state, notesData: action.payload };
     case "setExampaper":
       return { ...state, examData: action.payload };
-
+    case "loading":
+      return { ...state, isLoading: action.payload };
     default:
       return state;
   }
 };
 
 const getNotes = (dispatch) => (userId) => {
-  try {
-    http
-      .get("upload/notes/" + userId)
-      .then((res) => {
-        return res.data;
-      })
-      .then((res) => {
-        console.log(res);
-        dispatch({ type: "setNotes", payload: res.notesData });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } catch (error) {
-    console.log("err", error);
-  }
+  dispatch({ type: "loading", payload: true });
+
+  http
+    .get("upload/notes/" + userId)
+    .then((res) => {
+      return res.data;
+    })
+    .then((res) => {
+      dispatch({ type: "setNotes", payload: res.notesData });
+      dispatch({ type: "loading", payload: false });
+    })
+    .catch((err) => {
+      dispatch({ type: "loading", payload: false });
+    });
 };
 
 const getExampaper = (dispatch) => (userId) => {
-  try {
-    http
-      .get("exam/exampaper/" + userId)
-      .then((res) => {
-        return res.data;
-      })
-      .then((res) => {
-        console.log(res);
-        dispatch({ type: "setExampaper", payload: res.examData });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } catch (error) {
-    console.log("err", error);
-  }
+  dispatch({ type: "loading", payload: true });
+  http
+    .get("exam/exampaper/" + userId)
+    .then((res) => {
+      return res.data;
+    })
+    .then((res) => {
+      dispatch({ type: "setExampaper", payload: res.examData });
+      dispatch({ type: "loading", payload: false });
+    })
+    .catch((err) => {
+      dispatch({ type: "loading", payload: false });
+    });
 };
 
 export const { Provider, Context } = createDataContext(
   notesReducer,
   { getNotes, getExampaper },
-  { notesData: [], examData: [] }
+  { notesData: [], examData: [], isLoading: false }
 );

@@ -19,14 +19,14 @@ class SecureStorage {
     try {
       let data = localStorage.getItem(key);
       if (!data || data == null) {
-        return {};
+        return "";
       }
       let dec_data_bytes = CryptoJs.AES.decrypt(data, secret_string, {
         mode: CryptoJs.mode.ECB,
       });
       let dec_data = dec_data_bytes.toString(CryptoJs.enc.Utf8);
       console.log("key", dec_data);
-      return dec_data;
+      return JSON.parse(dec_data);
     } catch (error) {
       console.log(error);
     }

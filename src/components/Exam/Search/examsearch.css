@@ -5,12 +5,35 @@
   position: relative;
 }
 
+.ExamSearch_wrapper header img {
+  filter: brightness(0.8);
+  min-height: 250px;
+}
 .ExamSearch_wrapper header .input_wrapper {
   position: absolute;
   width: 100%;
   left: 0;
   right: 0;
-  top: 40%;
+  top: 20%;
+}
+
+.ExamSearch_wrapper header .input_wrapper .title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.ExamSearch_wrapper header .input_wrapper .title .titletext {
+  font-size: 28px;
+  color: var(--white);
+  font-weight: 500;
+  margin-bottom: 0;
+  line-height: 30px;
+}
+
+.ExamSearch_wrapper header .input_wrapper .title .subtitle {
+  font-size: 18px;
+  color: var(--white);
+  margin-bottom: 0;
 }
 
 .ExamSearch_wrapper header .input_wrapper .ant-form {
@@ -58,4 +81,30 @@
   background-color: var(--border-color);
   color: var(--white);
   font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  .ExamSearch_wrapper header .input_wrapper {
+    top: 15%;
+  }
+  .ExamSearch_wrapper header .input_wrapper .title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .ExamSearch_wrapper header .input_wrapper .title .titletext {
+    font-size: 22px;
+  }
+  .ExamSearch_wrapper header .input_wrapper .title .subtitle {
+    font-size: 14px;
+  }
+  .ExamSearch_wrapper header .input_wrapper .ant-form {
+    max-width: 95%;
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 568px) {
+  .ExamSearch_wrapper header .input_wrapper {
+    top: 10%;
+  }
 }

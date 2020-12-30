@@ -228,9 +228,12 @@
   color: var(--white);
 }
 
+@media screen and (max-width: 768px) {
+}
+
 @media screen and (max-width: 568px) {
   .home_wrapper .search_wrapper {
-    padding: 40px 10px;
+    padding: 0 10px;
     background-size: 40px, 50px;
     background-position: right bottom, left 98%;
   }
@@ -281,13 +284,16 @@
   .home_wrapper .feed_wrapper .textarea_wrapper textarea {
     flex-direction: row;
   }
+  .home_wrapper .feed_wrapper .feedBtn button {
+    font-size: 16px;
+  }
+  .home_wrapper .user_wrapper .slider_wrapper {
+    padding: 24px;
+  }
   .home_wrapper .made_wrapper h2 {
-    font-size: 18px;
+    font-size: 14px;
   }
   .home_wrapper .made_wrapper {
-    padding-bottom: 0;
+    padding: 0;
   }
-}
-
-@media screen and (max-width: 768px) {
 }

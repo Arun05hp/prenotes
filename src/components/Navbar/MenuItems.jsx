@@ -73,10 +73,10 @@ const MenuItems = () => {
 
       <SubMenu key="/books" title="Books">
         <Menu.Item key="/books/buy">
-          <NavLink to="/books/buy">Buy</NavLink>
+          <NavLink to="/books/buy">Looking for books</NavLink>
         </Menu.Item>
         <Menu.Item key="/books/sell">
-          <NavLink to="/books/sell">Sell</NavLink>
+          <NavLink to="/books/sell">Want to sell</NavLink>
         </Menu.Item>
       </SubMenu>
       <SubMenu key="/exampapers" title="Exam Papers">
@@ -89,24 +89,28 @@ const MenuItems = () => {
       </SubMenu>
       <SubMenu key="/tuitions" title="Tuitions">
         <Menu.Item key="/tuitions/search">
-          <NavLink to="/tuitions/search">Search</NavLink>
+          <NavLink to="/tuitions/search">Find </NavLink>
         </Menu.Item>
         <Menu.Item key="/tuitions/create">
-          <NavLink to="/tuitions/create">Create</NavLink>
+          <NavLink to="/tuitions/create">Create one</NavLink>
         </Menu.Item>
       </SubMenu>
 
-      <Menu.Item key="/notification">
-        <NavLink to="/notification">
-          <BellOutlined />
-        </NavLink>
-      </Menu.Item>
+      {md ? (
+        <Menu.Item key="/notification">
+          <NavLink to="/notification">
+            <BellOutlined />
+          </NavLink>
+        </Menu.Item>
+      ) : null}
 
-      <Menu.Item key="/messages">
-        <NavLink to="/messages">
-          <MessageOutlined />
-        </NavLink>
-      </Menu.Item>
+      {md ? (
+        <Menu.Item key="/messages">
+          <NavLink to="/messages">
+            <MessageOutlined />
+          </NavLink>
+        </Menu.Item>
+      ) : null}
 
       <SubMenu
         key="sub1"

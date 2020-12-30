@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, message } from "antd";
+import { Button, message, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import { Context as AuthContext } from "../../context/AuthContext";
 import http from "../../services/httpService";
@@ -9,17 +9,23 @@ const Notification = () => {
   const { state } = useContext(AuthContext);
   const { userData } = state;
   const [notifiList, setNotifiList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getNotifi = (id) => {
+    setIsLoading(true);
     http
       .get("notification/notifi/" + id)
       .then((res) => {
         return res.data;
       })
       .then((res) => {
-        setNotifiList((prev) => res.notifiData);
+        setNotifiList(res.notifiData);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
       })
       .catch((err) => {
+        setIsLoading(false);
         if (err.response.status === 400)
           message.error(err.response.data.message, 3);
       });
@@ -223,10 +229,19 @@ const Notification = () => {
         <p className="title">Notifications</p>
       </header>
       <div className="notifi_body">
-        {notifiList.length > 0 ? (
+        {isLoading ? (
+          <>
+            <div className="notifi">
+              <Skeleton active rows={1} paragraph={false} />
+            </div>
+            <div className="notifi">
+              <Skeleton active rows={1} paragraph={false} />
+            </div>
+          </>
+        ) : notifiList.length > 0 ? (
           notifiList.map((item, index) => getNotifiBox(item))
         ) : (
-          <p className="text">Empty</p>
+          <div className="notifi">You have no notifications.</div>
         )}
       </div>
     </div>
