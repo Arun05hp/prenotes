@@ -33,7 +33,7 @@ const SellBook = () => {
 
   const handleUpload = (val) => {
     const formData = new FormData();
-    formData.append("image", val.image.file.originFileObj);
+
     formData.append("bookName", val.bookName);
     formData.append("iduser", val.iduser);
     formData.append("authorName", val.authorName);
@@ -41,6 +41,7 @@ const SellBook = () => {
     formData.append("price", val.price);
     formData.append("description", val.description);
     formData.append("sellerStatus", 0);
+    formData.append("image", val.image.file.originFileObj);
 
     http
       .post("upload/book", formData)

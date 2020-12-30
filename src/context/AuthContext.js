@@ -9,6 +9,8 @@ const authReducer = (state, action) => {
       return { ...state, loginFlag: false, userData: {} };
     case "setUser":
       return { ...state, userData: action.payload };
+    case "token":
+      return { ...state, token: action.payload };
     default:
       return state;
   }
@@ -39,6 +41,7 @@ const login = (dispatch) => (flag, user) => {
   try {
     SecureStorage.setItem("userData", JSON.stringify(user));
     SecureStorage.setItem("loginFlag", JSON.stringify(flag));
+    dispatch({ type: "token", payload: user.token });
     dispatch({ type: "login", payload: flag });
   } catch (error) {
     console.log("err", error);
@@ -78,5 +81,5 @@ const logout = (dispatch) => () => {
 export const { Provider, Context } = createDataContext(
   authReducer,
   { tryLocalSignin, login, logout, getUserDetails },
-  { loginFlag: false, userData: {} }
+  { loginFlag: false, userData: {}, token: null }
 );

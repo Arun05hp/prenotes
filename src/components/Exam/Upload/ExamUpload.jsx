@@ -21,6 +21,11 @@ const ExamUpload = () => {
     const formData = new FormData();
     console.log(val);
 
+    formData.append("branch", val.branch);
+    formData.append("subject", val.subject);
+    formData.append("iduser", val.iduser);
+    formData.append("sem", val.sem);
+    formData.append("description", val.description);
     fileData.fileList.forEach((file) => {
       formData.append("file", file);
     });
@@ -29,19 +34,13 @@ const ExamUpload = () => {
         formData.append("file", file);
       });
     }
-    formData.append("branch", val.branch);
-    formData.append("subject", val.subject);
-    formData.append("iduser", val.iduser);
-    formData.append("sem", val.sem);
-    formData.append("description", val.description);
-
     http
       .post("exam/exampaper", formData)
       .then((res) => {
         return res.data;
       })
       .then((res) => {
-        message.success("Notes Uploaded Successfully", 3);
+        message.success(" Uploaded Successfully", 3);
         form.resetFields();
         setFileData({ fileList: [] });
         setFileData2({ fileList: [] });

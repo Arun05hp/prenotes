@@ -17,14 +17,14 @@ const NotesUpload = () => {
 
   const handleUpload = (val) => {
     const formData = new FormData();
-    fileData.fileList.forEach((file) => {
-      formData.append("file", file);
-    });
+
     formData.append("topic", val.topic);
     formData.append("iduser", val.iduser);
     formData.append("category", val.category);
     formData.append("description", val.description);
-
+    fileData.fileList.forEach((file) => {
+      formData.append("file", file);
+    });
     http
       .post("upload/pdf", formData)
       .then((res) => {

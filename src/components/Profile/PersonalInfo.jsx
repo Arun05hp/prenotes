@@ -50,7 +50,7 @@ function beforeUpload(file) {
 
 const PersonalInfo = () => {
   const { state, getUserDetails } = useContext(AuthContext);
-  const { userData } = state;
+  const { userData, token } = state;
   const [visibleInfo, setVisibleInfo] = useState(false);
   const [visibleEdu, setVisibleEdu] = useState(false);
   const [visiblePic, setVisiblePic] = useState(false);
@@ -592,6 +592,7 @@ const PersonalInfo = () => {
           className="avatar-uploader"
           showUploadList={false}
           action={actionUrl}
+          headers={{ Authorization: `PreNotes__20 ${token}` }}
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
