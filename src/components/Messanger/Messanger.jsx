@@ -61,6 +61,7 @@ const Messanger = () => {
               contactLists={contactLists}
               setFriendDetails={setFriendDetails}
               conLoading={conLoading}
+              selectedRoom={friendDetails.roomId}
             />
           </Col>
           <Col md={18} xs={24}>

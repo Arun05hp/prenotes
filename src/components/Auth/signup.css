@@ -52,6 +52,10 @@
   justify-content: space-between;
   max-height: 600px;
 }
+.signup .signup_wrapper .text_wrapper .goto {
+  color: var(--border-color);
+  cursor: pointer;
+}
 
 .signup .signup_wrapper h2 {
   font-size: 34px;

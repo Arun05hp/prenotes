@@ -130,7 +130,7 @@ const Notification = () => {
                 <p className="text">
                   The owner of book "{item.title}" has accepted your request.
                 </p>
-                <CloseOutlined />
+                <CloseOutlined onClick={() => handleClear(item.id)} />
               </div>
               <div className="dec_wrapper">
                 <Link to="/messages">
@@ -148,7 +148,7 @@ const Notification = () => {
                 <p className="text">
                   Request accepted "{item.title}" "{item.query}".
                 </p>
-                <CloseOutlined />
+                <CloseOutlined onClick={() => handleClear(item.id)} />
               </div>
               <div className="dec_wrapper">
                 <Link to="/messages">

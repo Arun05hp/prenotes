@@ -19,7 +19,6 @@ const Home = () => {
   let history = useHistory();
   const onSearch = (value) => {
     if (value) {
-      console.log(value);
       history.push("/notes/search", {
         string: value,
         edit: true,

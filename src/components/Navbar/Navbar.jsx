@@ -65,7 +65,7 @@ const Navbar = () => {
           visible={visible}
           className="sidenav"
         >
-          <MenuItems />
+          <MenuItems onClose={onClose} />
         </Drawer>
       </div>
     </nav>

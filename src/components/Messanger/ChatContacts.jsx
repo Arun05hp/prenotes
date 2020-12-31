@@ -1,7 +1,12 @@
 import { Avatar, Skeleton } from "antd";
 import React from "react";
 const BASEURL = process.env.REACT_APP_BASE_URL;
-const ChatContacts = ({ contactLists, setFriendDetails, conLoading }) => {
+const ChatContacts = ({
+  contactLists,
+  setFriendDetails,
+  conLoading,
+  selectedRoom,
+}) => {
   const handleUserSelect = (val) => {
     console.log(val);
     setFriendDetails({
@@ -23,7 +28,10 @@ const ChatContacts = ({ contactLists, setFriendDetails, conLoading }) => {
           </div>
         ) : contactLists.length > 0 ? (
           contactLists.map((item) => (
-            <div className="user" onClick={() => handleUserSelect(item)}>
+            <div
+              className={`user ${selectedRoom === item.roomId ? "active" : ""}`}
+              onClick={() => handleUserSelect(item)}
+            >
               <Avatar
                 size={{ xs: 24, sm: 32, md: 40 }}
                 src={

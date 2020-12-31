@@ -1,5 +1,5 @@
 .msg_wrapper {
-  padding: 24px 0;
+  padding: 24px 10px;
 }
 
 .msg_wrapper .userlist header {
@@ -23,6 +23,10 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   background-color: var(--white);
   margin: 6px 0;
+  cursor: pointer;
+}
+.msg_wrapper .userlist_body .user.active {
+  border-bottom: 1px solid var(--border-color);
 }
 
 .msg_wrapper .userlist_body .user p {
@@ -102,6 +106,7 @@
   max-width: 60%;
   padding: 6px;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .msg_wrapper .chat_container .messages .from {
@@ -173,4 +178,17 @@
   font-size: 14px;
   font-weight: 500;
   color: rgba(51, 51, 51, 0.65);
+}
+
+.msg_wrapper .blockmsg {
+  width: 100%;
+  background-color: var(--white);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.msg_wrapper .blockmsg p {
+  padding: 10px 5px;
+  margin: 0;
+  font-weight: 500;
 }

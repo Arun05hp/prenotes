@@ -26,13 +26,18 @@
 .userSlider_wrapper .userInfo h5 {
   color: var(--black);
 }
+
+.userSlider_wrapper .userInfo img {
+  max-width: 75px;
+  max-height: 75px;
+}
 .userSlider_wrapper .userInfo h5 {
   font-weight: 500;
 }
 
 .userSlider_wrapper .text {
   line-height: 22px;
-  text-align: left;
+  text-align: justify;
   color: var(--sec-black);
 }
 

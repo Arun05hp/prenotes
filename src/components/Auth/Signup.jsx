@@ -12,7 +12,7 @@ import {
   Select,
 } from "antd";
 import { UserOutlined, FileTextOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import http from "../../services/httpService";
 import SVG from "../../assets/images/signuplogo.svg";
 import "./signup.css";
@@ -50,12 +50,23 @@ const Signup = () => {
   const [form] = Form.useForm();
   const [current, setCurrent] = useState(0);
   const [userInfo, setUserInfo] = useState(initialInfo);
+
+  let history = useHistory();
+
   const next = () => {
     setCurrent(current + 1);
   };
 
   const prev = () => {
     setCurrent(current - 1);
+  };
+
+  const gotoSignIn = (value) => {
+    if (value) {
+      history.push("/", {
+        login: true,
+      });
+    }
   };
 
   const onFinish = (values) => {
@@ -112,7 +123,9 @@ const Signup = () => {
               <h2>Create account</h2>
               <p>
                 Already have an Account?{" "}
-                <Link to="/?signin=true">Sign In </Link>
+                <span className="goto" onClick={gotoSignIn}>
+                  Sign In
+                </span>
               </p>
               <div className="steps_wrapper">
                 <Steps current={current} className="stepWrapper">

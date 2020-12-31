@@ -1,13 +1,12 @@
+import { BellOutlined, MessageOutlined } from "@ant-design/icons";
+import { Avatar, Button, Grid, Menu, Modal } from "antd";
 import React, { useContext, useEffect, useState } from "react";
-import { Avatar, Badge, Button, Menu, Modal, Grid } from "antd";
 import { NavLink } from "react-router-dom";
 import { Context as AuthContext } from "../../context/AuthContext";
-import queryString from "query-string";
 import SignIn from "../Auth/Signin";
-import { BellOutlined, MessageOutlined } from "@ant-design/icons";
 const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
-const MenuItems = () => {
+const MenuItems = ({ onClose }) => {
   const BASEURL = process.env.REACT_APP_BASE_URL;
   const { md } = useBreakpoint();
 
@@ -31,12 +30,15 @@ const MenuItems = () => {
     console.log(key);
   };
 
-  useEffect(() => {
-    const params = queryString.parse(window.location.search);
+  const handleClose = () => {
+    if (onClose) onClose();
+  };
 
-    if (params.signin && params.signin === "true") {
-      showModal();
-    }
+  useEffect(() => {
+    // const params = queryString.parse(window.location.search);
+    // if (params.signin && params.signin === "true") {
+    //   showModal();
+    // }
   }, []);
 
   return loginFlag === false ? (
@@ -46,7 +48,7 @@ const MenuItems = () => {
           Sign in
         </Menu.Item>
       </Menu>
-      <Button className="signupBtn">
+      <Button className="signupBtn" onClick={handleClose}>
         <NavLink to="/signup">Sign up </NavLink>
       </Button>
       <Modal

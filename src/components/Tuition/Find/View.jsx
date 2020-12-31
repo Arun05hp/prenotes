@@ -1,10 +1,10 @@
 import {
   EnvironmentOutlined,
   FieldTimeOutlined,
-  MessageFilled,
-  InfoCircleFilled,
+
+  InfoCircleFilled, MessageFilled
 } from "@ant-design/icons";
-import { Avatar, Card, Col, Form, message, Row, Popover } from "antd";
+import { Avatar, Card, Col, message, Popover, Row } from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { Context as AuthContext } from "../../../context/AuthContext";
 import http from "../../../services/httpService";

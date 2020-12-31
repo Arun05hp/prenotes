@@ -1,30 +1,30 @@
-import React, { useEffect, useState, useContext } from "react";
+import {
+  FacebookOutlined,
+  MessageOutlined,
+  SearchOutlined,
+  ShareAltOutlined,
+  WhatsAppOutlined,
+} from "@ant-design/icons";
 import {
   Button,
   Card,
   Col,
-  Row,
   Form,
   Input,
   message,
   Modal,
+  Result,
+  Row,
   Select,
   Skeleton,
   Tooltip,
-  Result,
 } from "antd";
+import React, { useContext, useEffect, useState } from "react";
 import bg from "../../../assets/bg/books.png";
 import { Context as AuthContext } from "../../../context/AuthContext";
-
 import http from "../../../services/httpService";
 import "./notessearch.css";
-import {
-  SearchOutlined,
-  MessageOutlined,
-  ShareAltOutlined,
-  WhatsAppOutlined,
-  FacebookOutlined,
-} from "@ant-design/icons";
+
 const { Option } = Select;
 
 function getCategory(id) {
@@ -153,7 +153,7 @@ const NotesSearch = (props) => {
   return (
     <div className="notesSearch_wrapper">
       <header>
-        <img src={bg} alt="image" />
+        <img src={bg} alt="bg" />
         <div className="input_wrapper">
           <div className="title">
             <h3 className="titletext">Search.Study.Share</h3>
@@ -207,21 +207,21 @@ const NotesSearch = (props) => {
         <Row gutter={[16, 32]}>
           {isLoading ? (
             <>
-              <Col md={6} xs={12}>
+              <Col md={6} xs={24}>
                 <div className="innerWrapper">
                   <Card className="itemWrapper">
                     <Skeleton active />
                   </Card>
                 </div>
               </Col>
-              <Col md={6} xs={12}>
+              <Col md={6} xs={24}>
                 <div className="innerWrapper">
                   <Card className="itemWrapper">
                     <Skeleton active />
                   </Card>
                 </div>
               </Col>
-              <Col md={6} xs={12}>
+              <Col md={6} xs={24}>
                 <div className="innerWrapper">
                   <Card className="itemWrapper">
                     <Skeleton active />
@@ -233,7 +233,7 @@ const NotesSearch = (props) => {
             notesData.map((item) => {
               let id = item.iduser;
               return (
-                <Col key={item.idnotes} md={6} xs={12}>
+                <Col key={item.idnotes} md={6} xs={24}>
                   <div className="innerWrapper">
                     <a href={BASEURL + item.fileLink} target="_blank">
                       <Card className="itemWrapper">
