@@ -59,6 +59,7 @@
   height: 44px;
   border-radius: 5px !important;
   background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 /*---section-1 --*/

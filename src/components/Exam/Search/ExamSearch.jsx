@@ -9,6 +9,7 @@ import {
   message,
   Modal,
   Select,
+  Tooltip,
   Upload,
 } from "antd";
 
@@ -20,6 +21,7 @@ import {
   SearchOutlined,
   FileTextOutlined,
   UploadOutlined,
+  EyeOutlined,
 } from "@ant-design/icons";
 const { Option } = Select;
 const { Dragger } = Upload;
@@ -208,49 +210,35 @@ const ExamSearch = () => {
           {examPaperData.length > 0
             ? examPaperData.map((item) => {
                 return (
-                  <Col key={item.idnotes} md={12} xs={24}>
+                  <Col key={item.idnotes} md={8} xs={24}>
                     <div className="innerWrapper">
                       <Card className="itemWrapper">
-                        <Row gutter={8}>
-                          <Col md={6} xs={6}>
-                            <div className="file-icon">
-                              <FileTextOutlined />
-                            </div>
-                          </Col>
-                          <Col md={18} xs={18}>
-                            <h3>{item.subject}</h3>
-                            <p>{getBranch(item.branch)}</p>
-                          </Col>
-                          <Col md={12} sm={12} xs={24}>
-                            <div className="btn_wrapper">
-                              <a
-                                href={BASEURL + item.quefileLink}
-                                target="_blank"
-                              >
-                                <Button> View Exam Paper</Button>
-                              </a>
-                            </div>
-                          </Col>
-                          <Col md={12} sm={12} xs={24}>
-                            <div className="btn_wrapper">
-                              {item.solfileLink != null &&
-                              item.solfileLink != "" ? (
-                                <a
-                                  href={BASEURL + item.solfileLink}
-                                  target="_blank"
-                                >
-                                  <Button> View Soultion</Button>
-                                </a>
-                              ) : (
-                                <Button
-                                  onClick={() => handleUpload(item.idexam)}
-                                >
-                                  Upload Soultion
-                                </Button>
-                              )}
-                            </div>
-                          </Col>
-                        </Row>
+                        <div className="content">
+                          <h3>{item.subject}</h3>
+                          <p>{getBranch(item.branch)}</p>
+                        </div>
+
+                        <div className="btn_wrapper">
+                          <a href={BASEURL + item.quefileLink} target="_blank">
+                            <Button type="link">View Exam Paper</Button>
+                          </a>
+                          {item.solfileLink != null &&
+                          item.solfileLink != "" ? (
+                            <a
+                              href={BASEURL + item.solfileLink}
+                              target="_blank"
+                            >
+                              <Button type="link">View Solution</Button>
+                            </a>
+                          ) : (
+                            <Button
+                              type="link"
+                              onClick={() => handleUpload(item.idexam)}
+                            >
+                              Upload Solution
+                            </Button>
+                          )}
+                        </div>
                       </Card>
                     </div>
                   </Col>

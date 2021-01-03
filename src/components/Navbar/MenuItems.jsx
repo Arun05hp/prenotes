@@ -1,69 +1,21 @@
 import { BellOutlined, MessageOutlined } from "@ant-design/icons";
-import { Avatar, Button, Grid, Menu, Modal } from "antd";
-import React, { useContext, useEffect, useState } from "react";
+import { Avatar, Grid, Menu } from "antd";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Context as AuthContext } from "../../context/AuthContext";
-import SignIn from "../Auth/Signin";
+
 const { SubMenu } = Menu;
 const { useBreakpoint } = Grid;
-const MenuItems = ({ onClose }) => {
+
+const MenuItems = () => {
   const BASEURL = process.env.REACT_APP_BASE_URL;
   const { md } = useBreakpoint();
 
   const { state, logout } = useContext(AuthContext);
   const { loginFlag, userData } = state;
-  const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleClick = ({ key }) => {
-    console.log(key);
-  };
-
-  const handleClose = () => {
-    if (onClose) onClose();
-  };
-
-  useEffect(() => {
-    // const params = queryString.parse(window.location.search);
-    // if (params.signin && params.signin === "true") {
-    //   showModal();
-    // }
-  }, []);
-
-  return loginFlag === false ? (
-    <div className="nav_wrapper">
-      <Menu mode={md ? "horizontal" : "inline"} onClick={handleClick}>
-        <Menu.Item key="/?signin=true" onClick={() => showModal()}>
-          Sign in
-        </Menu.Item>
-      </Menu>
-      <Button className="signupBtn" onClick={handleClose}>
-        <NavLink to="/signup">Sign up </NavLink>
-      </Button>
-      <Modal
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={null}
-        width={400}
-        className="sign_modal"
-      >
-        <SignIn handleCancel={handleCancel} />
-      </Modal>
-    </div>
-  ) : (
-    <Menu mode={md ? "horizontal" : "inline"}>
+  return loginFlag === false ? null : (
+    <Menu mode={md ? "horizontal" : "inline"} triggerSubMenuAction="click">
       <SubMenu key="/notes" title="Notes">
         <Menu.Item key="/notes/search">
           <NavLink to="/notes/search">Search</NavLink>

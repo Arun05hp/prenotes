@@ -101,23 +101,27 @@ nav {
   background: #536fc6;
   position: relative;
 }
+.navbar .signbtnWrapper {
+  display: flex;
+  align-items: center;
+}
 .navbar .signupBtn {
-  padding: 0;
   margin-left: 40px;
+  line-height: 20px;
   background-color: var(--border-color);
   border-radius: 5px;
   color: var(--white);
-}
-.navbar .signupBtn:hover {
-  background-color: var(--border-color);
-
-  color: var(--white);
-}
-.navbar .signupBtn a {
-  padding: 10px 33px;
+  padding: 10px 32px;
+  height: auto;
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
+}
+.navbar .signupBtn:hover,
+.navbar .signupBtn:active,
+.navbar .signupBtn:focus {
+  background-color: var(--border-color);
+  color: var(--white);
 }
 
 .navbar .hamburger .barsBtn:after,
@@ -153,9 +157,7 @@ nav {
 .sidenav .uname {
   padding-left: 10px;
 }
-.sidenav {
-  display: none;
-}
+
 .sidenav .ant-drawer-body {
   padding: 24px 0;
 }
@@ -173,49 +175,32 @@ nav {
   font-weight: 500;
 }
 
-.sidenav .signupBtn {
-  margin-left: 24px;
-  background-color: var(--border-color);
-  border-radius: 5px;
-  color: var(--white);
-}
-
-.sidenav .signupBtn:hover {
-  background-color: var(--border-color);
-  color: var(--white);
-}
 .sidenav .ant-menu-sub.ant-menu-inline {
   background-color: #fcfcfc;
 }
 
-/*  
-
-.sidenav
-  .ant-drawer-body
-  .ant-menu-horizontal:not(.ant-menu-dark)
-  > .ant-menu-item {
-  margin: 0;
-  padding-left: 24px;
-}
-
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-item,
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-submenu {
-  display: inline-block;
-  width: 100%;
-}
-
-.ant-drawer-body .ant-menu-horizontal {
-  border-bottom: none;
-}
-
-.ant-drawer-body .ant-menu-horizontal > .ant-menu-item:hover {
-  border-bottom-color: transparent;
-} */
-
 .sign_modal .ant-modal-content {
   border-radius: 10px;
 }
+
+.navbar .mobSignbtnWrapper {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  margin-right: 10px;
+}
 @media screen and (max-width: 568px) {
+  .navbar .mobSignbtnWrapper .signupBtn {
+    margin-left: 10px;
+    padding: 5px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .navbar .mobSignbtnWrapper ul.ant-menu-horizontal li {
+    font-size: 13px !important;
+  }
 }
 
 @media (max-width: 767px) {
@@ -238,7 +223,7 @@ nav {
     margin-left: 10px;
   }
   .navbar .logo .logoimg {
-    max-width: 150px;
+    max-width: 140px;
   }
 
   .navbar .ant-menu-item,

@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import SecureStorage from "../helper/SecureStorage";
 const ProtectedRoute = ({ component: Component, render, ...rest }) => {
   const data = SecureStorage.getItem("userData");
+  console.log("data", data);
   return (
     <Route
       {...rest}
@@ -11,8 +12,8 @@ const ProtectedRoute = ({ component: Component, render, ...rest }) => {
           return (
             <Redirect
               to={{
-                pathname: "/?signin=true",
-                state: { from: props.location },
+                pathname: "/",
+                state: { login: true },
               }}
             />
           );

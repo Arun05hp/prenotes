@@ -19,7 +19,7 @@ import Reg from "../components/Tuition/Reg/Reg";
 import View from "../components/Tuition/Find/View";
 import NotFound from "../components/Errors/NotFound";
 const Navigation = () => {
-  const { tryLocalSignin, getUserDetails, state } = useContext(AuthContext);
+  const { tryLocalSignin, getUserDetails } = useContext(AuthContext);
 
   const getUser = async () => {
     const id = await tryLocalSignin();

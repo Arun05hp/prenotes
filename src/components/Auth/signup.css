@@ -1,5 +1,5 @@
 .signup {
-  height: 100vh;
+  height: 100%;
 }
 
 .signup > .ant-row {
@@ -10,9 +10,6 @@
   background-color: var(--border-color);
   height: 100%;
   color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .signup .create_svg_wrapper .text_wrapper {
@@ -46,12 +43,6 @@
   height: 100%;
 }
 
-.signup .signup_wrapper .text_wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  max-height: 600px;
-}
 .signup .signup_wrapper .text_wrapper .goto {
   color: var(--border-color);
   cursor: pointer;
@@ -109,15 +100,10 @@
 }
 
 @media screen and (max-width: 768px) {
-  .signup {
-    height: 100%;
-  }
   .signup .signup_wrapper {
     padding: 24px 10px;
   }
-  .signup .signup_wrapper .text_wrapper {
-    max-height: 100%;
-  }
+
   .signup .stepWrapper {
     padding: 0;
     flex-direction: row;
@@ -132,7 +118,6 @@
     flex: none;
     padding-left: 16px;
     white-space: nowrap;
-
     vertical-align: top;
   }
   .signup .ant-steps-vertical > .ant-steps-item .ant-steps-item-icon {
@@ -173,13 +158,8 @@
   }
 
   .signup .signup_wrapper h2 {
-    /* text-align: center; */
     font-size: 22px;
   }
-
-  /* .signup .signup_wrapper p {
-    text-align: center;
-  } */
 
   .signup .steps_wrapper {
     padding: 10px 0;
