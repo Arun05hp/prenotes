@@ -39,7 +39,9 @@ img {
   padding-bottom: 70px;
   background-color: #fdfdff;
 }
-
+.ant-form .ant-select-selection-item {
+  white-space: pre-wrap;
+}
 .ant-form .ant-form-item-label > label {
   color: var(--sec-black);
   font-weight: 500;
