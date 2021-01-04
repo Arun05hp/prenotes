@@ -63,7 +63,9 @@
 .notesSearch_wrapper .notesSearch_body {
   padding: 40px 20px;
 }
-
+.notesSearch_body .innerWrapper {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
 .notesSearch_wrapper input,
 .notesSearch_wrapper .input_wrapper .ant-form .ant-select-selector {
   border: none;

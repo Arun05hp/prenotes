@@ -20,9 +20,9 @@ const Profile = () => {
       <Row gutter={[16, 16]}>
         <Col md={0} sm={24} xs={24}>
           <div className="mobNav">
-            <h3>
+            {/* <h3>
               <UserOutlined />
-            </h3>
+            </h3> */}
             <Menu mode="horizontal">
               <Menu.Item
                 key="/myprofile/personalInfo"

@@ -1,10 +1,19 @@
 import {
   EnvironmentOutlined,
   FieldTimeOutlined,
-
-  InfoCircleFilled, MessageFilled
+  InfoCircleFilled,
+  MessageFilled,
 } from "@ant-design/icons";
-import { Avatar, Card, Col, message, Popover, Row } from "antd";
+import {
+  Avatar,
+  Card,
+  Col,
+  message,
+  Popover,
+  Row,
+  Result,
+  Skeleton,
+} from "antd";
 import React, { useContext, useEffect, useState } from "react";
 import { Context as AuthContext } from "../../../context/AuthContext";
 import http from "../../../services/httpService";
@@ -16,10 +25,10 @@ const View = (props) => {
   const { state } = useContext(AuthContext);
   const { userData } = state;
   const [tutionData, setTutionData] = useState([]);
-
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getAllTutions = (id) => {
+    setIsLoading(true);
     http
       .get("tutor/alltutors/" + id)
       .then((res) => {
@@ -32,13 +41,13 @@ const View = (props) => {
             (item.for === userData.gender || item.for === "All")
         );
         setTutionData(filterData);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
         if (!err.response) return message.error("Network Error", 3);
 
-        if (err.response.status && err.response.status === 400)
-          message.error(err.response.data.message, 3);
+        setIsLoading(false);
       });
   };
 
@@ -87,93 +96,122 @@ const View = (props) => {
       <main className="tutorview_body">
         <h3>Ongoing Tuitions details</h3>
         <Row gutter={[16, 32]}>
-          {tutionData.length > 0
-            ? tutionData.map((item) => (
-                <Col md={8} sm={12} xs={24}>
-                  <Card>
-                    <div className="box">
-                      <div className="userInfo">
-                        <div className="userDetails">
-                          <Avatar
-                            size={{
-                              xs: 40,
-                              sm: 50,
-                              md: 50,
-                              lg: 54,
-                              xl: 54,
-                              xxl: 54,
-                            }}
-                            style={{
-                              color: "#f56a00",
-                              backgroundColor: "#fde3cf",
-                            }}
-                            src={
-                              item.profileImg != null
-                                ? BASEURL + item.profileImg
-                                : null
-                            }
-                          >
-                            {item.tutorName ? item.tutorName.charAt(0) : ""}
-                          </Avatar>
-                          <div className="name">
-                            <p className="title"> {item.tutorName}</p>
-                            <div className="subtitle">{item.subject}</div>
-                          </div>
-                        </div>
-
-                        <div className="time">
-                          <p>
-                            <FieldTimeOutlined />
-                            {new Date(item.timing).toLocaleTimeString("en-US")}
-                          </p>
-                          <p className="day">Every {item.day}</p>
+          {isLoading ? (
+            <>
+              <Col md={8} sm={12} xs={24}>
+                <Card>
+                  <div className="box">
+                    <div className="userInfo">
+                      <Skeleton avatar paragraph={{ rows: 3 }} />
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+              <Col md={8} sm={12} xs={24}>
+                <Card>
+                  <div className="box">
+                    <div className="userInfo">
+                      <Skeleton avatar paragraph={{ rows: 3 }} />
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+            </>
+          ) : tutionData.length > 0 ? (
+            tutionData.map((item) => (
+              <Col md={8} sm={12} xs={24}>
+                <Card>
+                  <div className="box">
+                    <div className="userInfo">
+                      <div className="userDetails">
+                        <Avatar
+                          size={{
+                            xs: 40,
+                            sm: 50,
+                            md: 50,
+                            lg: 54,
+                            xl: 54,
+                            xxl: 54,
+                          }}
+                          style={{
+                            color: "#f56a00",
+                            backgroundColor: "#fde3cf",
+                          }}
+                          src={
+                            item.profileImg != null
+                              ? BASEURL + item.profileImg
+                              : null
+                          }
+                        >
+                          {item.tutorName ? item.tutorName.charAt(0) : ""}
+                        </Avatar>
+                        <div className="name">
+                          <p className="title"> {item.tutorName}</p>
+                          <div className="subtitle">{item.subject}</div>
                         </div>
                       </div>
-                      <div className="price_wrapper">
-                        <div className="price">
+
+                      <div className="time">
+                        <p>
+                          <FieldTimeOutlined />
+                          {new Date(item.timing).toLocaleTimeString("en-US")}
+                        </p>
+                        <p className="day">Every {item.day}</p>
+                      </div>
+                    </div>
+                    <div className="price_wrapper">
+                      <div className="price">
+                        <p className="title">
+                          ₹ {item.fees} <span className="subtitle">/month</span>
+                        </p>
+                      </div>
+
+                      <div className="loc">
+                        <p>
+                          <EnvironmentOutlined /> {item.loc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="btn_wrapper">
+                    <MessageFilled onClick={() => handleQuery(item)} />{" "}
+                    <Popover
+                      overlayClassName="popinfo"
+                      placement="top"
+                      title="Contact Details"
+                      trigger={["click", "hover"]}
+                      content={
+                        <>
                           <p className="title">
-                            ₹ {item.fees}{" "}
-                            <span className="subtitle">/month</span>
+                            Email:{" "}
+                            <span className="subtitle">{item.email}</span>
                           </p>
-                        </div>
-
-                        <div className="loc">
-                          <p>
-                            <EnvironmentOutlined /> {item.loc}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="btn_wrapper">
-                      <MessageFilled onClick={() => handleQuery(item)} />{" "}
-                      <Popover
-                        overlayClassName="popinfo"
-                        placement="top"
-                        title="Contact Details"
-                        trigger={["click", "hover"]}
-                        content={
-                          <>
+                          {item.contact ? (
                             <p className="title">
-                              Email:{" "}
-                              <span className="subtitle">{item.email}</span>
+                              Contact No.:{" "}
+                              <span className="subtitle">{item.contact}</span>
                             </p>
-                            {item.contact ? (
-                              <p className="title">
-                                Contact No.:{" "}
-                                <span className="subtitle">{item.contact}</span>
-                              </p>
-                            ) : null}
-                          </>
-                        }
-                        trigger="click"
-                      >
-                        <InfoCircleFilled />
-                      </Popover>
-                    </div>
-                  </Card>
-                </Col>
-              ))
-            : null}
+                          ) : null}
+                        </>
+                      }
+                      trigger="click"
+                    >
+                      <InfoCircleFilled />
+                    </Popover>
+                  </div>
+                </Card>
+              </Col>
+            ))
+          ) : (
+            <Col md={24} sm={24}>
+              <Result
+                status="404"
+                title="No Results Found"
+                subTitle={null}
+                // extra={<Button type="primary">Back Home</Button>}
+              />
+            </Col>
+          )}
         </Row>
       </main>
     </div>

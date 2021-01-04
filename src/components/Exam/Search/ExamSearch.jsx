@@ -9,7 +9,8 @@ import {
   message,
   Modal,
   Select,
-  Tooltip,
+  Skeleton,
+  Result,
   Upload,
 } from "antd";
 
@@ -46,7 +47,7 @@ function getBranch(id) {
 }
 const ExamSearch = () => {
   const BASEURL = process.env.REACT_APP_BASE_URL;
-
+  const [isLoading, setIsLoading] = useState(false);
   const [examPaperData, setExamPaperData] = useState([]);
   const [form] = Form.useForm();
   const [visibleModal, setVisibleModal] = useState(false);
@@ -54,6 +55,7 @@ const ExamSearch = () => {
   const [fileList, setFileList] = useState([]);
 
   const onFinish = (val) => {
+    setIsLoading(true);
     http
       .get("exam/searchexampaper", {
         params: {
@@ -65,14 +67,17 @@ const ExamSearch = () => {
       })
       .then((res) => {
         setExamPaperData(res.examPaperData);
+        setIsLoading(false);
       })
       .catch((err) => {
+        setIsLoading(false);
         if (err.response.status === 400)
           message.error(err.response.data.message, 3);
       });
   };
 
   const getAllExamPaper = () => {
+    setIsLoading(true);
     http
       .get("exam/allexampaper")
       .then((res) => {
@@ -80,9 +85,10 @@ const ExamSearch = () => {
       })
       .then((res) => {
         setExamPaperData(res.examPaperData);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
@@ -207,44 +213,68 @@ const ExamSearch = () => {
       </header>
       <main className="ExamSearch_body">
         <Row gutter={[16, 16]}>
-          {examPaperData.length > 0
-            ? examPaperData.map((item) => {
-                return (
-                  <Col key={item.idnotes} md={8} xs={24}>
-                    <div className="innerWrapper">
-                      <Card className="itemWrapper">
-                        <div className="content">
-                          <h3>{item.subject}</h3>
-                          <p>{getBranch(item.branch)}</p>
-                        </div>
-
-                        <div className="btn_wrapper">
-                          <a href={BASEURL + item.quefileLink} target="_blank">
-                            <Button type="link">View Exam Paper</Button>
-                          </a>
-                          {item.solfileLink != null &&
-                          item.solfileLink != "" ? (
-                            <a
-                              href={BASEURL + item.solfileLink}
-                              target="_blank"
-                            >
-                              <Button type="link">View Solution</Button>
-                            </a>
-                          ) : (
-                            <Button
-                              type="link"
-                              onClick={() => handleUpload(item.idexam)}
-                            >
-                              Upload Solution
-                            </Button>
-                          )}
-                        </div>
-                      </Card>
+          {isLoading ? (
+            <>
+              <Col md={8} xs={24}>
+                <div className="innerWrapper">
+                  <Card className="itemWrapper">
+                    <div className="content">
+                      <Skeleton active />
                     </div>
-                  </Col>
-                );
-              })
-            : ""}
+                  </Card>
+                </div>
+              </Col>
+              <Col md={8} xs={24}>
+                <div className="innerWrapper">
+                  <Card className="itemWrapper">
+                    <div className="content">
+                      <Skeleton active />
+                    </div>
+                  </Card>
+                </div>
+              </Col>
+            </>
+          ) : examPaperData.length > 0 ? (
+            examPaperData.map((item) => {
+              return (
+                <Col key={item.idnotes} md={8} xs={24}>
+                  <div className="innerWrapper">
+                    <Card className="itemWrapper">
+                      <div className="content">
+                        <h3>{item.subject}</h3>
+                        <p>{getBranch(item.branch)}</p>
+                      </div>
+
+                      <div className="btn_wrapper">
+                        <a href={BASEURL + item.quefileLink} target="_blank">
+                          <Button type="link">View Exam Paper</Button>
+                        </a>
+                        {item.solfileLink != null && item.solfileLink != "" ? (
+                          <a href={BASEURL + item.solfileLink} target="_blank">
+                            <Button type="link">View Solution</Button>
+                          </a>
+                        ) : (
+                          <Button
+                            type="link"
+                            onClick={() => handleUpload(item.idexam)}
+                          >
+                            Upload Solution
+                          </Button>
+                        )}
+                      </div>
+                    </Card>
+                  </div>
+                </Col>
+              );
+            })
+          ) : (
+            <Result
+              status="404"
+              title="No Results Found"
+              subTitle={null}
+              // extra={<Button type="primary">Back Home</Button>}
+            />
+          )}
         </Row>
       </main>
       <Modal
